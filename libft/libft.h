@@ -97,8 +97,7 @@ int					ft_digitsize(int n);
 int					ft_count_words(char const *s, char c);
 int					ft_min(int a, int b);
 int					ft_max(int a, int b);
-char				**new_arr(int size);
 void				show_arr(char **arr);
 int					arrlen(char **arr);
-
+char				**new_arr(int n, int m);
 #endif
