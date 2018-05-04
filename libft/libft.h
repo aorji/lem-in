@@ -100,4 +100,5 @@ int					ft_max(int a, int b);
 void				show_arr(char **arr);
 int					arrlen(char **arr);
 char				**new_arr(int n, int m);
+int					arrdel(char ***arr);
 #endif

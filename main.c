@@ -12,108 +12,103 @@
 
 #include "lem-in.h"
 
-int isnum(char *s)
+void	error()
 {
-	if ((ft_atoi(s) != 0 || !ft_strcmp(s, "0")) &&
-	(ft_digitsize(ft_atoi(s)) == ft_strlen(s)))
+	ft_printf("%s\n", "ERROR");
+	exit(1);
+}
+
+int 	check_elem(char *a, char *b, char *c)
+{
+	if (isnum(b) && isnum(c) && a[0] != 'L' && a[0] != '#')
 		return (1);
 	return (0);
 }
 
-void space(char *line)
-{
-	int i = 0;
-	int j = 0;
-
-	while(line[i])
-	{
-		if (line[i] == ' ')
-			j++;
-		i++;
-	}
-	j == 2 ? 0 : exit(1);
-}
-
-int	count_rooms(int fd)
+t_node	*rooms(t_farm *f, t_node *node)
 {
 	char	*line;
 	char	**arr;
+	t_node	*head;
 	int i = 0;
+	int s;
+	int e;
 
-	while (get_next_line(fd, &line) == 1)
+	s = 0;
+	e = 0;
+	head = node;
+	f->rooms = 0;
+	while (get_next_line(f->fd, &line) == 1)
 	{
 		arr = ft_strsplit(line, ' ');
-		if ((arrlen(arr) == 3) && isnum(arr[1]) && isnum(arr[2]))
+		if (!ft_strcmp(line, "##start"))
+			s = 1;
+		else if (!ft_strcmp(line, "##end"))
+			e = 1;
+		else if ((arrlen(arr) == 3) && check_elem(arr[0], arr[1], arr[2]))
 		{
-			space(line);
-			i++;
+			check_spaces(line);
+			node->name = ft_strcpy(ft_strnew(ft_strlen(arr[0])), arr[0]);
+			node->start = s;
+			node->end = e;
+			node->x = ft_atoi(arr[1]);
+			node->y = ft_atoi(arr[2]);
+			node->next  = (t_node *)malloc(sizeof(t_node));
+			node = node->next;
+			i++; // А НУЖНО ЛИ ??
+			s = 0;
+			e = 0;
 		}
 		else
-			return (i);
+		{
+			// free(&(node->name)); !!!!!
+			node = NULL;
+			f->rooms = i;
+			return (head);
+		}
+		arrdel(&arr);
 	}
-	return (i);
+	error();
+	return (head);
 }
 
-int ants_num(int fd)
+void	ants_num(t_farm *f)
 {
 	char	*line;
-	int n;
+	int		n;
 
-	if (get_next_line(fd, &line) == 1)
+	if (get_next_line(f->fd, &line) == 1)
 	{
-		if (isnum(line) && (n = ft_atoi(line) > 0))
-			return (n);
-		exit(1);
+		if (isnum(line) && ((n = ft_atoi(line)) > 0))
+			f->ants = n;
+		else
+			error();
 	}
-	return (-1);
 }
+
 t_farm ft_read(int ac, char *av)
 {
 	t_farm	f;
+	t_node	*node;
 
+	node = (t_node *)malloc(sizeof(t_node));
+	node->next = NULL;
 	f.fd = (ac == 2) ? open(av, O_RDONLY) : 0;
-	f.ants = ants_num(f.fd);
-	f.rooms = count_rooms(f.fd);
+	ants_num(&f);
+	node = rooms(&f, node);
 	close(f.fd);
+	while (node->next) //ПОЧЕМУ NEXT?????
+	{
+		printf("name = %s\n", node->name);
+		printf("s = %d\n", node->start);
+		printf("e = %d\n", node->end);
+		node = node->next;
+	}
 	return (f);
-}
-
-void	create_arr(t_farm f, char *av)
-{
-	// char	**coord;
-	// char	**name;
-	// char	**links;
-	char	***name;
-	char	**arr;
-	char	*line;
-	int		i = -1;
-	int		j = -1;
-	int fd = 0;
-
-	name = (char ***)malloc(sizeof(char **) * (f.rooms + 1));
-	name[f.rooms] = NULL;
-	while (++i < f.rooms)
-	{
-		printf("%s\n", "TUT");
-		name[i] = (char **)malloc(sizeof(char *) * (3));
-		name[i][3] = NULL;
-	}
-	i = 0;
-	while (name[i])
-	{
-		j = 0;
-		while (name[i][j])
-		{
-			printf("%s\n", name[i][j]);
-			j++;
-		}
-		i++;
-	}
 }
 
 int main(int ac, char **av)
 {
 	t_farm f = ft_read(ac, av[1]);
-	create_arr(f, av[1]);
-	//lemin(ft_read(ac, av[1]));
+	ft_printf("fd = %d, rooms = %d, ants = %d\n", f.fd, f.rooms, f.ants);
 }
