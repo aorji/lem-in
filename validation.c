@@ -35,3 +35,11 @@ void	check_spaces(char *line)
 	}
 	j == 2 ? 0 : error();
 }
+
+int 	check_elem(char *a, char *b, char *c)
+{
+	if (isnum(b) && isnum(c) && a[0] != 'L' && a[0] != '#')
+		return (1);
+	error();
+	return (0);
+}

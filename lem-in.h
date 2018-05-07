@@ -29,7 +29,6 @@ typedef	struct		s_node
 typedef	struct		s_farm
 {
 	int				ants;
-	int				rooms;
 	int				fd;
 }					t_farm;
 
@@ -38,8 +37,17 @@ typedef	struct		s_map
 	char			**arr;
 }					t_map;
 
+/*main.c*/
+int		main(int ac, char **av);
+t_farm	ft_read(int ac, char *av);
+void	error();
+
+/* validation.c */
 int		isnum(char *s);
 void	check_spaces(char *line);
-t_node	*rooms(t_farm *f, t_node *node);
+int 	check_elem(char *a, char *b, char *c);
+
+/*fill_info.c*/
+t_node	*fill_node(t_node *node, char **arr, int s, int e);
+int		rooms(t_farm *f, t_node **head);
 void	ants_num(t_farm *f);
-void	error();

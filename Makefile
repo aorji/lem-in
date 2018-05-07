@@ -13,7 +13,7 @@
 NAME	=	lem-in
 FLG		=	-Wall -Wextra -Werror
 H 		=	lem-in.h
-SRC		=	main.c validation.c
+SRC		=	main.c validation.c fill_info.c
 OBJ		=	$(SRC:.c=.o)
 PRNTF	=	ft_printf/libftprintf.a
 
