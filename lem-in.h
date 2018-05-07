@@ -10,19 +10,28 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef LEMIN_H
+# define LEMIN_H
 #include "./libft/libft.h"
 #include "./ft_printf/ft_printf.h"
 #include <fcntl.h>
 #include <stdio.h>
+
+typedef	struct		s_kids
+{
+	char			*name;
+	struct s_kids	*next;
+}					t_kids;
 
 typedef	struct		s_node
 {
 	char			*name;
 	int				start;
 	int				end;
-	char			*links;
+	t_kids			*kid;
 	int				x;
 	int				y;
+	int				visit;
 	struct s_node	*next;
 }					t_node;
 
@@ -48,6 +57,11 @@ void	check_spaces(char *line);
 int 	check_elem(char *a, char *b, char *c);
 
 /*fill_info.c*/
-t_node	*fill_node(t_node *node, char **arr, int s, int e);
+t_node	*fill_node(t_node *node, char **arr);
+t_node	*new_node(void);
 int		rooms(t_farm *f, t_node **head);
 void	ants_num(t_farm *f);
+#endif
+
+/*links.c*/
+int	link_info(int fd, char *line, t_node **node);

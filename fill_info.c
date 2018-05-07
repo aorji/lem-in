@@ -12,75 +12,54 @@
 
 #include "lem-in.h"
 
-int	find_node(t_node *node, char *s)
-{
-	while (node)
-	{
-		if (!ft_strcmp(node->name, arr[0]))
-			return (1);
-		node = node->next;
-	}
-	return (0);
-
-}
-
-static int link_info(char *line, int fd, t_node *node)
-{
-	arr = ft_strsplit(line, '-');
-	if (arrlen(arr) == 2 && find_node(node, arr[0]) && find_node(node, arr[1]))
-		return (1);
-
-	
-}
-
-t_node	*fill_node(t_node *node, char **arr, int s, int e)
+t_node	*fill_node(t_node *node, char **arr)
 {
 	node->name = ft_strcpy(ft_strnew(ft_strlen(arr[0])), arr[0]);
-	node->start = s;
-	node->end = e;
 	node->x = ft_atoi(arr[1]);
 	node->y = ft_atoi(arr[2]);
-	node->next  = (t_node *)malloc(sizeof(t_node));
-	node = node->next;
+	node->next = new_node();
+	return (node);
+}
+
+t_node	*new_node(void)
+{
+	t_node	*node;
+
+	node = (t_node *)malloc(sizeof(t_node));
+	node->start = 0;
+	node->end = 0;
+	node->visit = 0;
+	node->next  = NULL;
 	return (node);
 }
 
 int		rooms(t_farm *f, t_node **head)
 {
 	t_node	*node;
-	char	*line;
 	char	**arr;
-	int		s;
-	int		e;
+	char	*line;
 
-	s = 0;
-	e = 0;
-	node = (t_node *)malloc(sizeof(t_node));
-	node->next = NULL;
+	node = new_node();
 	*head = node;
 	while (get_next_line(f->fd, &line) == 1)
 	{
 		arr = ft_strsplit(line, ' ');
 		if (!ft_strcmp(line, "##start"))
-			s = 1;
+			node->start = 1;
 		else if (!ft_strcmp(line, "##end"))
-			e = 1;
-		else if ((line[0] == '#') && (line[1] != '#'))
-			continue; 
-		else if ((arrlen(arr) == 3) && check_elem(arr[0], arr[1], arr[2]))
+			node->end = 1;
+		else if (arrlen(arr) == 3 && isnum(arr[1]) && isnum(arr[2]))
 		{
+			(arr[0][0] == 'L') ? error() : 0;
 			check_spaces(line);
-			node = fill_node(node, arr, s, e);
-			s = 0;
-			e = 0;
-		}
-		else
-		{
-			free(node);
-			node = NULL;
+			node = fill_node(node, arr);
+			node = node->next;
 			arrdel(&arr);
-			return(link_info(line, f->fd, *head));
 		}
+		else if ((line[0] == '#') && (line[1] != '#'))
+			continue ;
+		else
+			return (link_info(f->fd, line, head));
 		arrdel(&arr);
 	}
 	error();

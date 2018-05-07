@@ -27,13 +27,18 @@ t_farm	ft_read(int ac, char *av)
 	ants_num(&f);
 	rooms(&f, &node);
 	close(f.fd);
-	while (node)//ПОЧЕМУ NEXT?????
+	while (node->next)//ПОЧЕМУ NEXT?????
 	{
 		printf("name = %s\n", node->name);
 		printf("s = %d\n", node->start);
 		printf("e = %d\n", node->end);
 		printf("x = %d\n", node->x);
 		printf("y = %d\n", node->y);
+		// while (node->kid->next)
+		// {
+		// 	printf("kid name = %s\n", node->kid->name);
+		// 	node->kid = node->kid->next;
+		// }
 		node = node->next;
 	}
 	return (f);
