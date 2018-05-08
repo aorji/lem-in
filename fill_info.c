@@ -10,18 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem-in.h"
+#include "lemin.h"
 
-t_node	*fill_node(t_node *node, char **arr)
-{
-	node->name = ft_strcpy(ft_strnew(ft_strlen(arr[0])), arr[0]);
-	node->x = ft_atoi(arr[1]);
-	node->y = ft_atoi(arr[2]);
-	node->next = new_node();
-	return (node);
-}
-
-t_node	*new_node(void)
+static t_node	*new_node(void)
 {
 	t_node	*node;
 
@@ -34,7 +25,16 @@ t_node	*new_node(void)
 	return (node);
 }
 
-int		rooms(t_farm *f, t_node **head)
+static t_node	*fill_node(t_node *node, char **arr)
+{
+	node->name = ft_strcpy(ft_strnew(ft_strlen(arr[0])), arr[0]);
+	node->x = ft_atoi(arr[1]);
+	node->y = ft_atoi(arr[2]);
+	node->next = new_node();
+	return (node);
+}
+
+int				rooms(t_farm *f, t_node **head)
 {
 	t_node	*node;
 	char	**arr;
@@ -67,7 +67,7 @@ int		rooms(t_farm *f, t_node **head)
 	return (1);
 }
 
-void	ants_num(t_farm *f)
+void			ants_num(t_farm *f)
 {
 	char	*line;
 	int		n;

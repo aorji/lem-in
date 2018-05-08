@@ -10,12 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem-in.h"
-
-// static	t_kids	*fill_kid(t_kids *kid, char *link)
-// {
-
-// }
+#include "lemin.h"
 
 static t_kids	*new_kid(void)
 {
@@ -43,12 +38,10 @@ static void		create_link(t_node **node, char *name, char *link)
 				tmp->next = new_kid();
 				tmp = tmp->next;
 				tmp->name = ft_strcpy(ft_strnew(ft_strlen(link)), link);
+				return;
 			}
-			else
-			{
-				head->kid = new_kid();
-				head->kid->name = ft_strcpy(ft_strnew(ft_strlen(link)), link);
-			}
+			head->kid = new_kid();
+			head->kid->name = ft_strcpy(ft_strnew(ft_strlen(link)), link);
 			return ;
 		}
 		head = head->next;
