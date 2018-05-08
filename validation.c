@@ -36,6 +36,21 @@ void	check_spaces(char *line)
 	j == 2 ? 0 : error();
 }
 
+void	check_dash(char *line)
+{
+	int i;
+
+	i = 0;
+	while (*line)
+	{
+		if (*line == '-')
+			i++;
+		line++;
+	}
+	if (i > 1)
+		error();
+}
+
 int 	check_elem(char *a, char *b, char *c)
 {
 	if (isnum(b) && isnum(c) && a[0] != 'L' && a[0] != '#')

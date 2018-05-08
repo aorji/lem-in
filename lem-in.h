@@ -54,6 +54,7 @@ void	error();
 /* validation.c */
 int		isnum(char *s);
 void	check_spaces(char *line);
+void	check_dash(char *line);
 int 	check_elem(char *a, char *b, char *c);
 
 /*fill_info.c*/

@@ -28,6 +28,7 @@ t_node	*new_node(void)
 	node = (t_node *)malloc(sizeof(t_node));
 	node->start = 0;
 	node->end = 0;
+	node->kid = NULL;
 	node->visit = 0;
 	node->next  = NULL;
 	return (node);
