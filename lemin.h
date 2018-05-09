@@ -32,6 +32,7 @@ typedef	struct		s_node
 	int				x;
 	int				y;
 	int				visit;
+	int				step;
 	struct s_node	*next;
 }					t_node;
 
@@ -50,7 +51,7 @@ typedef	struct		s_map
 **main.c
 */
 int					main(int ac, char **av);
-t_farm				ft_read(int ac, char *av);
+t_farm				ft_read(int ac, char *av, t_node **head);
 void				error();
 
 /*
@@ -71,4 +72,11 @@ void				ants_num(t_farm *f);
 **links.c
 */
 int					link_info(int fd, char *line, t_node **node);
+
+/*
+**find_way.c
+*/
+t_node				*end(t_node *node);
+t_node				*start(t_node *node);
+void				find_way(t_node **node, t_node *current);
 #endif
