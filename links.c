@@ -17,6 +17,7 @@ static t_kids	*new_kid(void)
 	t_kids	*new;
 	new = (t_kids*)malloc(sizeof(t_kids));
 	new->next = NULL;
+	// new->pr = NULL;
 	return (new);
 }
 

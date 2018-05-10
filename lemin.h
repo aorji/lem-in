@@ -21,6 +21,7 @@ typedef	struct		s_kids
 {
 	char			*name;
 	struct s_kids	*next;
+	struct s_kids	*pr;
 }					t_kids;
 
 typedef	struct		s_node
@@ -29,6 +30,7 @@ typedef	struct		s_node
 	int				start;
 	int				end;
 	t_kids			*kid;
+	t_kids			*reserve;
 	int				x;
 	int				y;
 	int				visit;

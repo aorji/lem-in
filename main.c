@@ -12,6 +12,20 @@
 
 #include "lemin.h"
 
+static t_node	*create_reserve(t_node *node)
+{
+	t_node	*head;
+
+	head = node;
+
+	while(node->next)
+	{
+		node->reserve = node->kid;
+		node = node->next;
+	}
+	return (head);
+}
+
 static void	print_node(t_node *node)
 {
 	while (node->next)
@@ -27,6 +41,11 @@ static void	print_node(t_node *node)
 			printf("linked with = %s\n", node->kid->name);
 			node->kid = node->kid->next;
 		}
+		// while (node->reserve)
+		// {
+		// 	printf("linked with = %s\n", node->reserve->name);
+		// 	node->reserve = node->reserve->next;
+		// }
 		printf("\n");
 		node = node->next;
 	}
@@ -60,7 +79,8 @@ int		main(int ac, char **av)
 	f = ft_read(ac, av[1], &node);
 	end(node);
 	s = start(node);
+	node = create_reserve(node);
 	find_way(&node, s);
-	print_node(node);
-	ft_printf("fd = %d, ants = %d\n", f.fd, f.ants);
+	// print_node(node);
+	// ft_printf("fd = %d, ants = %d\n", f.fd, f.ants);
 }
