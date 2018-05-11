@@ -29,12 +29,12 @@ typedef	struct		s_node
 	char			*name;
 	int				start;
 	int				end;
+	int				step;
+	char			*previous;
 	t_kids			*kid;
 	t_kids			*reserve;
 	int				x;
 	int				y;
-	int				visit;
-	int				step;
 	struct s_node	*next;
 }					t_node;
 

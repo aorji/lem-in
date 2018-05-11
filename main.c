@@ -12,6 +12,12 @@
 
 #include "lemin.h"
 
+void	error(void)
+{
+	ft_printf("%s\n", "ERROR");
+	exit(1);
+}
+
 static t_node	*create_reserve(t_node *node)
 {
 	t_node	*head;
@@ -26,35 +32,25 @@ static t_node	*create_reserve(t_node *node)
 	return (head);
 }
 
-static void	print_node(t_node *node)
+static t_node	*previous(t_node *head, char *name)
 {
-	while (node->next)
-	{
-		printf("name = %s\n", node->name);
-		printf("start = %d\n", node->start);
-		printf("end = %d\n", node->end);
-		printf("visit = %d\n", node->visit);
-		printf("x = %d\n", node->x);
-		printf("y = %d\n", node->y);
-		while (node->kid)
-		{
-			printf("linked with = %s\n", node->kid->name);
-			node->kid = node->kid->next;
-		}
-		// while (node->reserve)
-		// {
-		// 	printf("linked with = %s\n", node->reserve->name);
-		// 	node->reserve = node->reserve->next;
-		// }
-		printf("\n");
-		node = node->next;
-	}
+	while (ft_strcmp(head->name, name))
+		head = head->next;
+	return (head);
 }
 
-void	error(void)
+static void	print_way(t_node *s, t_node *e, t_node *node)
 {
-	ft_printf("%s\n", "ERROR");
-	exit(1);
+	t_node	*head;
+	t_list	*list;
+
+	head = node;
+	printf("%s\n", e->name);
+	while (ft_strcmp(e->name, s->name))
+	{
+		printf("%s\n", e->previous);
+		e = previous(head, e->previous);
+	}
 }
 
 t_farm	ft_read(int ac, char *av, t_node **head)
@@ -74,13 +70,14 @@ int		main(int ac, char **av)
 {
 	t_farm	f;
 	t_node	*s;
+	t_node	*e;
 	t_node	*node;
 
 	f = ft_read(ac, av[1], &node);
-	end(node);
+	e = end(node);
 	s = start(node);
 	node = create_reserve(node);
 	find_way(&node, s);
-	// print_node(node);
-	// ft_printf("fd = %d, ants = %d\n", f.fd, f.ants);
+	print_way(s, e, node);
+	return (1);
 }
