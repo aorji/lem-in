@@ -45,12 +45,15 @@ static void	print_way(t_node *s, t_node *e, t_node *node)
 	t_list	*list;
 
 	head = node;
-	printf("%s\n", e->name);
+	if (!(e->previous))
+		error();
+	printf("%s", e->name);
 	while (ft_strcmp(e->name, s->name))
 	{
-		printf("%s\n", e->previous);
+		printf("-%s", e->previous);
 		e = previous(head, e->previous);
 	}
+	printf("\n");
 }
 
 t_farm	ft_read(int ac, char *av, t_node **head)

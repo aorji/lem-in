@@ -12,6 +12,16 @@
 
 #include "lemin.h"
 
+static void	check_repeat(char *arr, t_node *head)
+{
+	while (head->next)
+	{
+		if (!ft_strcmp(head->name, arr))
+			error();
+		head = head->next;
+	}
+}
+
 static t_node	*new_node(void)
 {
 	t_node	*node;
@@ -55,11 +65,12 @@ int				rooms(t_farm *f, t_node **head)
 		{
 			(arr[0][0] == 'L') ? error() : 0;
 			check_spaces(line);
+			check_repeat(arr[0], *head);
 			node = fill_node(node, arr);
 			node = node->next;
 			arrdel(&arr);
 		}
-		else if ((line[0] == '#') && (line[1] != '#'))
+		else if (line[0] == '#')
 			continue ;
 		else
 			return (link_info(f->fd, line, head));
@@ -78,7 +89,7 @@ void			ants_num(t_farm *f)
 	{
 		if (isnum(line) && ((n = ft_atoi(line)) > 0))
 			f->ants = n;
-		else if ((line[0] == '#') && (line[1] != '#'))
+		else if (line[0] == '#')
 			ants_num(f);
 		else
 			error();

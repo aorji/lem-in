@@ -46,7 +46,7 @@ void	find_way(t_node **node, t_node *current)
 	if (!(current->kid))
 		return ;
 	while (ft_strcmp(tmp->name, current->kid->name))
-		tmp = tmp->next;;
+		tmp = tmp->next;
 	if (tmp->step && (tmp->step <= (current->step + 1)))
 	{
 		if (tmp->end)
@@ -66,6 +66,7 @@ void	find_way(t_node **node, t_node *current)
 		{
 			tmp->step = current->step + 1;
 			tmp->kid = tmp->reserve;
+			tmp->previous = current->name;
 			find_way(node, tmp);
 		}
 		tmp->step = current->step + 1;

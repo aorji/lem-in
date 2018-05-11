@@ -60,7 +60,7 @@ int			link_info(int fd, char *line, t_node **node)
 		create_link(node, arr[0], arr[1]);
 		create_link(node, arr[1], arr[0]);
 	}
-	if ((arrlen(arr) != 2) && !(line[0] == '#') && (line[1] != '#'))
+	if ((arrlen(arr) != 2) && !(line[0] == '#'))
 	{
 		arrdel(&arr);
 		error();
