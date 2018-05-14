@@ -13,7 +13,7 @@
 NAME	=	lem-in
 FLG		=	-Wall -Wextra -Werror
 H 		=	lemin.h
-SRC		=	main.c validation.c fill_info.c links.c find_way.c unused.c
+SRC		=	main.c validation.c rooms.c links.c find_way.c unused.c print_way.c new_way.c
 OBJ		=	$(SRC:.c=.o)
 PRNTF	=	ft_printf/libftprintf.a
 

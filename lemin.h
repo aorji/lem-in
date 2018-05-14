@@ -83,6 +83,19 @@ t_node				*start(t_node *node);
 void				find_way(t_node **node, t_node *current);
 
 /*
+**print_way.c
+*/
+t_node				*previous(t_node *head, char *name);
+t_list				*create_way(t_node *s, t_node *e, t_node *node);
+void				print_way(t_list *list);
+
+/*
+**print_way.c
+*/
+void				ft_reset(t_node **reset, t_node *node);
+t_node				*del(t_node *node, t_list *list, t_node *s, t_node *e);
+
+/*
 **unused.c
 */
 void	print_node(t_node *node);
