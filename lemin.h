@@ -81,4 +81,9 @@ int					link_info(int fd, char *line, t_node **node);
 t_node				*end(t_node *node);
 t_node				*start(t_node *node);
 void				find_way(t_node **node, t_node *current);
+
+/*
+**unused.c
+*/
+void	print_node(t_node *node);
 #endif

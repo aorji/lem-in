@@ -42,7 +42,7 @@ void	find_way(t_node **node, t_node *current)
 
 	tmp = *node;
 	if (current->end)
-		return;
+		return ;
 	if (!(current->kid))
 		return ;
 	while (ft_strcmp(tmp->name, current->kid->name))
