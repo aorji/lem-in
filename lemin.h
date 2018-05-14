@@ -65,10 +65,11 @@ void				check_dash(char *line);
 int					check_elem(char *a, char *b, char *c);
 
 /*
-**fill_info.c
+**rooms.c
 */
 int					rooms(t_farm *f, t_node **head);
 void				ants_num(t_farm *f);
+t_node				*new_node(void);
 
 /*
 **links.c
@@ -90,7 +91,7 @@ t_list				*create_way(t_node *s, t_node *e, t_node *node);
 void				print_way(t_list *list);
 
 /*
-**print_way.c
+**new_way.c
 */
 void				ft_reset(t_node **reset, t_node *node);
 t_node				*del(t_node *node, t_list *list, t_node *s, t_node *e);

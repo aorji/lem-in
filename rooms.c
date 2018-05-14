@@ -22,7 +22,7 @@ static void	check_repeat(char *arr, t_node *head)
 	}
 }
 
-static t_node	*new_node(void)
+t_node		*new_node(void)
 {
 	t_node	*node;
 
