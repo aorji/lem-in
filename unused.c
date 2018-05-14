@@ -37,3 +37,15 @@ void	print_node(t_node *node)
 // 	}
 // 	printf("\n");
 // }
+
+// static void	print_way(t_list *list)
+// {
+// 	int i = 0;
+// 	while(list->next)
+// 	{
+// 		i++ ? printf("-") : 0;
+// 		printf("[%s]", list->content);
+// 		list = list->next;
+// 	}
+// 	printf("\n");
+// }

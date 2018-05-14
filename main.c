@@ -41,10 +41,10 @@ static t_node	*previous(t_node *head, char *name)
 
 static void	print_way(t_list *list)
 {
-	while(list->next)
+	if (list->next)
 	{
-		printf("%s\n", list->content);
-		list = list->next;
+		print_way(list->next);
+		printf("[%s]->", list->content);
 	}
 }
 
@@ -97,6 +97,44 @@ static void ft_reset(t_node **reset, t_node *node)
 	}
 }
 
+static t_node *del(t_node *node, t_list *list, t_node *s, t_node *e)
+{
+	t_list	*head;
+	t_node	*tmp;
+	t_node	*new;
+	
+	head = list;
+	while (list->next)
+	{
+		if (!ft_strcmp(node->name, list->content) && ft_strcmp(node->name, s->name) && ft_strcmp(node->name, e->name))
+		{
+			tmp = node;
+			node = node->next;
+			free(tmp);
+			list = head;
+		}
+		list = list->next;
+	}
+	new = node;
+	while (node->next && node->next->next)
+	{
+		list = head;
+		while (list->next)
+		{
+			if (!ft_strcmp(node->next->name, list->content) && ft_strcmp(node->next->name, s->name) && ft_strcmp(node->next->name, e->name))
+			{
+				tmp = node->next;
+				node->next = node->next->next;
+				free(tmp);
+			}
+			else
+				list = list->next;
+		}
+		node = node->next;
+	}
+	return (new);
+}
+
 int		main(int ac, char **av)
 {
 	t_farm	f;
@@ -104,16 +142,27 @@ int		main(int ac, char **av)
 	t_node	*e;
 	t_node	*node;
 	t_node	*reset;
+	t_list	*list;
 
 	f = ft_read(ac, av[1], &node);
 	e = end(node);
 	s = start(node);
 	node = create_reserve(node);
-	// while (f.ants)
-	// {
+	while (f.ants)
+	{
 		find_way(&node, s);
-		print_way(create_way(s, e, node));
-		// ft_reset(&reset, node);
-	// }	
+		list = create_way(s, e, node);
+		print_way(list);
+		printf("done\n");
+		ft_reset(&reset, node);
+		node = reset; 
+		node = del(node, list, s, e);
+		find_way(&node, s);
+		list = create_way(s, e, node);
+		print_way(list);
+		printf("done\n");
+		break ;
+		f.ants--;
+	}	
 	return (1);
 }
