@@ -40,13 +40,11 @@ void	find_way(t_node **node, t_node *current)
 {
 	t_node	*tmp;
 
-	// printf("%s\n", current->name);
 	tmp = *node;
 	if (current->end)
 		return ;
 	if (!(current->kid))
 		return ;
-	// printf("%s %s %d\n", current->name, current->kid->name, current->step);
 	while (tmp->next && ft_strcmp(tmp->name, current->kid->name))
 		tmp = tmp->next;
 	if (!(tmp->next))

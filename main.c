@@ -18,26 +18,14 @@ void	error(void)
 	exit(1);
 }
 
-static t_node	*create_reserve(t_node *node)
-{
-	t_node	*head;
-
-	head = node;
-
-	while(node->next)
-	{
-		node->reserve = node->kid;
-		node = node->next;
-	}
-	return (head);
-}
-
 t_farm	ft_read(int ac, char *av, t_node **head)
 {
 	t_farm	f;
 	t_node	*node;
 
 	f.fd = (ac == 2) ? open(av, O_RDONLY) : 0;
+	f.way = NULL;
+	f.min = 0;
 	ants_num(&f);
 	rooms(&f, &node);
 	*head = node;
@@ -45,30 +33,23 @@ t_farm	ft_read(int ac, char *av, t_node **head)
 	return (f);
 }
 
-static t_node	*node_cpy(t_node *reset, t_node *node)
+static int	list_len(t_list *list)
 {
-	t_node *head;
+	int i = 0;
 
-	head = reset;
-	while (node->next)
+	while (list->next)
 	{
-		reset->name = node->name;
-		reset->start = node->start;
-		reset->end = node->end;
-		reset->kid = node->kid;
-		reset->reserve = node->reserve;
-		reset->x = node->x;
-		reset->y = node->y;
-		reset->next = new_node();
-		reset = reset->next;
-		node = node->next;
+		i++;
+		list = list->next;
 	}
-	return (head);
+	return (i);
+
 }
 
 int		main(int ac, char **av)
 {
 	t_farm	f;
+	int i = 0;
 	t_node	*s;
 	t_node	*e;
 	t_node	*node;
@@ -79,17 +60,29 @@ int		main(int ac, char **av)
 	node = create_reserve(node);
 	reset = new_node();
 	reset = node_cpy(reset, node);
-	while (f.ants)
+	while (i < f.ants)
 	{
-		e = end(node);
 		s = start(node);
 		find_way(&node, s);
+		e = end(node);
+		if (e->previous == NULL)
+		{
+			node = node_cpy(node, reset);
+			continue ;
+		}
 		list = create_way(s, e, node);
+		if (f.min && (list_len(list) - f.min) > (f.ants - i))
+			list = f.way;
 		print_way(list);
-		printf("done\n");
-		node = del(reset, list, s, e);
-		f.ants--;
+		if (!i)
+		{
+			f.way = list;
+			f.min = list_len(list);
+		}
+		ft_printf("done\n");
+		node = ft_reset(node);
+		node = del(node, list, s, e);
+		i++;
 	}
-	// print_node(node);
 	return (1);
 }

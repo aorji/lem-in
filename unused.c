@@ -2,7 +2,7 @@
 #include "lemin.h"
 void	print_node(t_node *node)
 {
-	while (node->next)
+	while (node && node->next)
 	{
 		printf("name = %s\n", node->name);
 		printf("start = %d\n", node->start);

@@ -48,6 +48,6 @@ void	print_way(t_list *list)
 	if (list->next)
 	{
 		print_way(list->next);
-		printf("[%s]->", list->content);
+		ft_printf("[%s]->", list->content);
 	}
 }

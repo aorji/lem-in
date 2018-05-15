@@ -42,6 +42,8 @@ typedef	struct		s_farm
 {
 	int				ants;
 	int				fd;
+	int				min;
+	t_list			*way;
 }					t_farm;
 
 typedef	struct		s_map
@@ -93,8 +95,14 @@ void				print_way(t_list *list);
 /*
 **new_way.c
 */
-void				ft_reset(t_node **reset, t_node *node);
 t_node				*del(t_node *node, t_list *list, t_node *s, t_node *e);
+
+/*
+**node_modif.c
+*/
+t_node				*node_cpy(t_node *reset, t_node *node);
+t_node				*ft_reset(t_node *node);
+t_node				*create_reserve(t_node *node);
 
 /*
 **unused.c
