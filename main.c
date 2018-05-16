@@ -46,6 +46,34 @@ static int	list_len(t_list *list)
 
 }
 
+static t_holder	*new_holder()
+{
+	t_holder	*new;
+
+	new = (t_holder *)malloc(sizeof(t_holder));
+	new->lst = ft_lstnew(NULL, 0);
+	new->next = NULL;
+	return (new);
+}
+
+static void	ft_list_reverse(t_list **begin_list)
+{
+	t_list		*curr;
+	t_list		*next;
+	t_list		*prev;
+
+	curr = *begin_list;
+	prev = NULL;
+	while (curr)
+	{
+		next = curr->next;
+		curr->next = prev;
+		prev = curr;
+		curr = next;
+	}
+	*begin_list = prev;
+}
+
 int		main(int ac, char **av)
 {
 	t_farm	f;
@@ -55,7 +83,11 @@ int		main(int ac, char **av)
 	t_node	*node;
 	t_node	*reset;
 	t_list	*list;
+	t_holder *lh;
+	t_holder *head;
 
+	lh = new_holder();
+	head = lh;
 	f = ft_read(ac, av[1], &node);
 	node = create_reserve(node);
 	reset = new_node();
@@ -73,16 +105,20 @@ int		main(int ac, char **av)
 		list = create_way(s, e, node);
 		if (f.min && (list_len(list) - f.min) > (f.ants - i))
 			list = f.way;
-		print_way(list);
+		ft_list_reverse(&list);
+		list = list->next;
+		lh->lst = list;
+		lh->next = new_holder();
+		lh = lh->next;
 		if (!i)
 		{
 			f.way = list;
 			f.min = list_len(list);
 		}
-		ft_printf("done\n");
 		node = ft_reset(node);
 		node = del(node, list, s, e);
 		i++;
 	}
+	print_way(head);
 	return (1);
 }

@@ -51,6 +51,12 @@ typedef	struct		s_map
 	char			**arr;
 }					t_map;
 
+typedef	struct		s_holder
+{
+	t_list			*lst;
+	struct s_holder	*next;
+}					t_holder;
+
 /*
 **main.c
 */
@@ -90,7 +96,7 @@ void				find_way(t_node **node, t_node *current);
 */
 t_node				*previous(t_node *head, char *name);
 t_list				*create_way(t_node *s, t_node *e, t_node *node);
-void				print_way(t_list *list);
+void				print_way(t_holder *lh);
 
 /*
 **new_way.c

@@ -26,7 +26,7 @@ t_list	*create_way(t_node *s, t_node *e, t_node *node)
 	list->content = e->name;
 	list->next = ft_lstnew(NULL, 0);
 	list = list->next;
-	while (ft_strcmp(e->name, s->name))
+	while (ft_strcmp(e->previous, s->name))
 	{
 		list->content = e->previous;
 		list->next = ft_lstnew(NULL, 0);
@@ -43,11 +43,32 @@ t_node	*previous(t_node *head, char *name)
 	return (head);
 }
 
-void	print_way(t_list *list)
+void	print_way(t_holder *lh)
 {
-	if (list->next)
+	t_holder	*head;
+	int i;
+	int j;
+	int k;
+
+	k = 0;
+	j = 1;
+	head = lh;
+	while (j)
 	{
-		print_way(list->next);
-		ft_printf("[%s]->", list->content);
+		j = 0;
+		i = 0;
+		lh = head;
+		k++ ? ft_printf("\n") : 0;
+		while (lh->next)
+		{
+			++i;
+			if (lh->lst)
+			{
+				j++;
+				ft_printf("L%d%s%s ", i, "->", lh->lst->content);
+				lh->lst = lh->lst->next;
+			}
+			lh = lh->next;
+		}
 	}
 }
