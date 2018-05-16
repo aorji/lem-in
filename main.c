@@ -119,6 +119,6 @@ int		main(int ac, char **av)
 		node = del(node, list, s, e);
 		i++;
 	}
-	print_way(head);
+	print_way(head, e);
 	return (1);
 }

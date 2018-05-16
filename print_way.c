@@ -12,6 +12,17 @@
 
 #include "lemin.h"
 
+static int check_written(t_list *tmp, char *s, char *end)
+{
+	while (tmp)
+	{
+		if (!ft_strcmp(tmp->content, s) && ft_strcmp(s, end))
+			return (0);
+		tmp = tmp->next;
+	}
+	return (1);
+}
+
 t_list	*create_way(t_node *s, t_node *e, t_node *node)
 {
 	t_node	*head;
@@ -43,9 +54,11 @@ t_node	*previous(t_node *head, char *name)
 	return (head);
 }
 
-void	print_way(t_holder *lh)
+void	print_way(t_holder *lh, t_node *e)
 {
 	t_holder	*head;
+	t_list		*tmp;
+	t_list		*start;
 	int i;
 	int j;
 	int k;
@@ -59,16 +72,21 @@ void	print_way(t_holder *lh)
 		i = 0;
 		lh = head;
 		k++ ? ft_printf("\n") : 0;
+		tmp = ft_lstnew("L", 1);
+		start = tmp;
 		while (lh->next)
 		{
 			++i;
-			if (lh->lst)
+			if (lh->lst && check_written(start, lh->lst->content, e->name))
 			{
 				j++;
+				tmp->next = lh->lst;
+				tmp = tmp->next;
 				ft_printf("L%d%s%s ", i, "->", lh->lst->content);
 				lh->lst = lh->lst->next;
 			}
 			lh = lh->next;
 		}
+		//ft_lstdel(&tmp);
 	}
 }

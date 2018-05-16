@@ -96,7 +96,7 @@ void				find_way(t_node **node, t_node *current);
 */
 t_node				*previous(t_node *head, char *name);
 t_list				*create_way(t_node *s, t_node *e, t_node *node);
-void				print_way(t_holder *lh);
+void				print_way(t_holder *lh, t_node *e);
 
 /*
 **new_way.c
