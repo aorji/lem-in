@@ -12,7 +12,7 @@
 
 #include "lemin.h"
 
-static void	check_repeat(char *arr, t_node *head)
+static void		check_repeat(char *arr, t_node *head)
 {
 	while (head->next)
 	{
@@ -22,7 +22,7 @@ static void	check_repeat(char *arr, t_node *head)
 	}
 }
 
-static void	check_doub(t_node *head, int i, int j)
+static void		check_doub(t_node *head, int i, int j)
 {
 	while (head)
 	{
@@ -32,7 +32,7 @@ static void	check_doub(t_node *head, int i, int j)
 	}
 }
 
-t_node		*new_node(void)
+t_node			*new_node(void)
 {
 	t_node	*node;
 
@@ -43,7 +43,7 @@ t_node		*new_node(void)
 	node->previous = NULL;
 	node->kid = NULL;
 	node->reserve = NULL;
-	node->next  = NULL;
+	node->next = NULL;
 	return (node);
 }
 
@@ -65,7 +65,6 @@ int				rooms(t_farm *f, t_node **head)
 
 	node = new_node();
 	*head = node;
-	// test = node_cpy(node);
 	while (get_next_line(f->fd, &line) == 1)
 	{
 		arr = ft_strsplit(line, ' ');

@@ -12,7 +12,7 @@
 
 #include "lemin.h"
 
-static void	check_repeat(char *arr, t_node *head)
+static void		check_repeat(char *arr, t_node *head)
 {
 	while (head->next)
 	{
@@ -33,7 +33,7 @@ static t_node	*new_node(void)
 	node->previous = NULL;
 	node->kid = NULL;
 	node->reserve = NULL;
-	node->next  = NULL;
+	node->next = NULL;
 	return (node);
 }
 

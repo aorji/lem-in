@@ -109,8 +109,4 @@ t_node				*node_cpy(t_node *node);
 t_node				*ft_reset(t_node *node);
 t_node				*create_reserve(t_node *node);
 
-/*
-**unused.c
-*/
-void	print_node(t_node *node);
 #endif
