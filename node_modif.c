@@ -12,10 +12,12 @@
 
 #include "lemin.h"
 
-t_node	*node_cpy(t_node *reset, t_node *node)
+t_node	*node_cpy(t_node *node)
 {
 	t_node *head;
+	t_node	*reset;
 
+	reset = new_node();
 	head = reset;
 	while (node->next)
 	{

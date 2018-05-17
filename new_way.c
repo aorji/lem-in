@@ -19,7 +19,6 @@ t_node	*del(t_node *node, t_list *list, t_node *s, t_node *e)
 	t_node	*new;
 	
 	head = list;
-
 	while (list->next && node->next && !node->start && !node->end)
 	{
 		if (!ft_strcmp(node->name, list->content))
@@ -29,19 +28,20 @@ t_node	*del(t_node *node, t_list *list, t_node *s, t_node *e)
 			free(tmp);
 			list = head;
 		}
-		list = list->next;
+		else
+			list = list->next;
 	}
 	new = node;
 	while (node->next && node->next->next)
 	{
 		list = head;
-		while (list->next && node->next->name && !node->next->start && !node->next->end)
+				// ft_printf("%s\n", head->content);
+		while (list->next && node->next && !node->next->start && !node->next->end && node->next->next)
 		{
-			// printf("%s =? %s\n", node->next->name, list->content);
-			if (!ft_strcmp(node->next->name, list->content) && ft_strcmp(node->next->name, s->name) && ft_strcmp(node->next->name, e->name))
+			if (!ft_strcmp(node->next->name, list->content) && !(node->next->start) && !(node->next->end))
 			{
-				// printf("%s\n", "== -> del");
 				tmp = node->next;
+				(node->next->next) ? (node->next = node->next->next) : (node->next = NULL);
 				node->next = node->next->next;
 				list = head;
 				free(tmp);

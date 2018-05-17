@@ -33,12 +33,16 @@ static void		create_link(t_node **node, char *name, char *link)
 			if (head->kid)
 			{
 				tmp = head->kid;
+				(!ft_strcmp(tmp->name, link)) ? error() : 0;
 				while (tmp->next)
+				{
+					!ft_strcmp(tmp->name, link) ? error() : 0;
 					tmp = tmp->next;
+				}
 				tmp->next = new_kid();
 				tmp = tmp->next;
 				tmp->name = ft_strcpy(ft_strnew(ft_strlen(link)), link);
-				return;
+				return ;
 			}
 			head->kid = new_kid();
 			head->kid->name = ft_strcpy(ft_strnew(ft_strlen(link)), link);

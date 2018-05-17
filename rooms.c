@@ -22,6 +22,16 @@ static void	check_repeat(char *arr, t_node *head)
 	}
 }
 
+static void	check_doub(t_node *head, int i, int j)
+{
+	while (head)
+	{
+		if ((head->x == i) && (head->y == j))
+			error();
+		head = head->next;
+	}
+}
+
 t_node		*new_node(void)
 {
 	t_node	*node;
@@ -49,11 +59,13 @@ static t_node	*fill_node(t_node *node, char **arr)
 int				rooms(t_farm *f, t_node **head)
 {
 	t_node	*node;
+	t_node	*test;
 	char	**arr;
 	char	*line;
 
 	node = new_node();
 	*head = node;
+	// test = node_cpy(node);
 	while (get_next_line(f->fd, &line) == 1)
 	{
 		arr = ft_strsplit(line, ' ');
@@ -65,6 +77,7 @@ int				rooms(t_farm *f, t_node **head)
 		{
 			(arr[0][0] == 'L') ? error() : 0;
 			check_spaces(line);
+			check_doub(node_cpy(*head), ft_atoi(arr[1]), ft_atoi(arr[2]));
 			check_repeat(arr[0], *head);
 			node = fill_node(node, arr);
 			node = node->next;

@@ -15,7 +15,6 @@
 # include "./libft/libft.h"
 # include "./ft_printf/ft_printf.h"
 # include <fcntl.h>
-# include <stdio.h>
 
 typedef	struct		s_kids
 {
@@ -106,7 +105,7 @@ t_node				*del(t_node *node, t_list *list, t_node *s, t_node *e);
 /*
 **node_modif.c
 */
-t_node				*node_cpy(t_node *reset, t_node *node);
+t_node				*node_cpy(t_node *node);
 t_node				*ft_reset(t_node *node);
 t_node				*create_reserve(t_node *node);
 

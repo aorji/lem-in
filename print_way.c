@@ -80,9 +80,10 @@ void	print_way(t_holder *lh, t_node *e)
 			if (lh->lst && check_written(start, lh->lst->content, e->name))
 			{
 				j++;
+				(j == 1) ? 0 : ft_printf(" ");
 				tmp->next = lh->lst;
 				tmp = tmp->next;
-				ft_printf("L%d%s%s ", i, "->", lh->lst->content);
+				ft_printf("L%d%s%s", i, "-", lh->lst->content);
 				lh->lst = lh->lst->next;
 			}
 			lh = lh->next;

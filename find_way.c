@@ -14,26 +14,40 @@
 
 t_node	*end(t_node *node)
 {
+	int	i;
+	t_node	*end;
+
+	i = 0;
 	while (node->next)
 	{
 		if (node->end)
-			return (node);
+		{
+			end = node;
+			i++;
+		}
 		node = node->next;
 	}
-	error();
-	return (node);
+	(i != 1) ? error() : 0;
+	return (end);
 }
 
 t_node	*start(t_node *node)
 {
+	int i;
+	t_node	*start;
+
+	i = 0;
 	while (node->next)
 	{
 		if (node->start)
-			return (node);
+		{
+			start = node;
+			i++;
+		}
 		node = node->next;
 	}
-	error();
-	return (node);
+	(i != 1) ? error() : 0;
+	return (start);
 }
 
 void	find_way(t_node **node, t_node *current) 

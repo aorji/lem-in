@@ -90,8 +90,7 @@ int		main(int ac, char **av)
 	head = lh;
 	f = ft_read(ac, av[1], &node);
 	node = create_reserve(node);
-	reset = new_node();
-	reset = node_cpy(reset, node);
+	reset = node_cpy(node);
 	while (i < f.ants)
 	{
 		s = start(node);
@@ -99,7 +98,8 @@ int		main(int ac, char **av)
 		e = end(node);
 		if (e->previous == NULL)
 		{
-			node = node_cpy(node, reset);
+			(!i) ? error() : 0;
+			node = node_cpy(reset);
 			continue ;
 		}
 		list = create_way(s, e, node);
@@ -117,6 +117,7 @@ int		main(int ac, char **av)
 		}
 		node = ft_reset(node);
 		node = del(node, list, s, e);
+		// ft_printf("%d\n", i);
 		i++;
 	}
 	print_way(head, e);
