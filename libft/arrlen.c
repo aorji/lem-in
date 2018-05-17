@@ -14,8 +14,9 @@
 
 int	arrlen(char **arr)
 {
-	int i = 0;
+	int i;
 
+	i = 0;
 	while (arr[i])
 		i++;
 	return (i);
