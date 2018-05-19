@@ -32,22 +32,7 @@ static void		check_doub(t_node *head, int i, int j)
 	}
 }
 
-t_node			*new_node(void)
-{
-	t_node	*node;
-
-	node = (t_node *)malloc(sizeof(t_node));
-	node->start = 0;
-	node->end = 0;
-	node->step = 0;
-	node->previous = NULL;
-	node->kid = NULL;
-	node->reserve = NULL;
-	node->next = NULL;
-	return (node);
-}
-
-static t_node	*fill_node(t_node *node, char **arr)
+static t_node	*fill_room(t_node *node, char **arr)
 {
 	node->name = ft_strcpy(ft_strnew(ft_strlen(arr[0])), arr[0]);
 	node->x = ft_atoi(arr[1]);
@@ -56,7 +41,7 @@ static t_node	*fill_node(t_node *node, char **arr)
 	return (node);
 }
 
-int				rooms(t_farm *f, t_node **head)
+int				rooms(t_farm *f, t_node **head, char **buff)
 {
 	t_node	*node;
 	t_node	*test;
@@ -67,6 +52,8 @@ int				rooms(t_farm *f, t_node **head)
 	*head = node;
 	while (get_next_line(f->fd, &line) == 1)
 	{
+		*buff = ft_strjoin(*buff, line);
+		*buff = ft_strjoin(*buff, "\n");
 		arr = ft_strsplit(line, ' ');
 		if (!ft_strcmp(line, "##start"))
 			node->start = 1;
@@ -78,31 +65,33 @@ int				rooms(t_farm *f, t_node **head)
 			check_spaces(line);
 			check_doub(node_cpy(*head), ft_atoi(arr[1]), ft_atoi(arr[2]));
 			check_repeat(arr[0], *head);
-			node = fill_node(node, arr);
+			node = fill_room(node, arr);
 			node = node->next;
 			arrdel(&arr);
 		}
 		else if (line[0] == '#')
 			continue ;
 		else
-			return (link_info(f->fd, line, head));
+			return (link_info(f->fd, line, head, buff));
 		arrdel(&arr);
 	}
 	error();
 	return (1);
 }
 
-void			ants_num(t_farm *f)
+void			ants_num(t_farm *f, char **buff)
 {
 	char	*line;
 	int		n;
 
 	if (get_next_line(f->fd, &line) == 1)
 	{
+		*buff = ft_strjoin(*buff, line);
+		*buff = ft_strjoin(*buff, "\n");
 		if (isnum(line) && ((n = ft_atoi(line)) > 0))
 			f->ants = n;
 		else if (line[0] == '#')
-			ants_num(f);
+			ants_num(f, buff);
 		else
 			error();
 	}

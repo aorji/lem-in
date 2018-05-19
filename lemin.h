@@ -60,8 +60,8 @@ typedef	struct		s_holder
 **main.c
 */
 int					main(int ac, char **av);
-t_farm				ft_read(int ac, char *av, t_node **head);
-void				error();
+t_farm				ft_read(int ac, char *av, t_node **head, char **buff);
+int					error();
 
 /*
 **validation.c
@@ -74,14 +74,14 @@ int					check_elem(char *a, char *b, char *c);
 /*
 **rooms.c
 */
-int					rooms(t_farm *f, t_node **head);
-void				ants_num(t_farm *f);
+int					rooms(t_farm *f, t_node **head, char **buff);
+void				ants_num(t_farm *f, char **buff);
 t_node				*new_node(void);
 
 /*
 **links.c
 */
-int					link_info(int fd, char *line, t_node **node);
+int					link_info(int fd, char *line, t_node **node, char **buff);
 
 /*
 **find_way.c
@@ -108,5 +108,11 @@ t_node				*del(t_node *node, t_list *list, t_node *s, t_node *e);
 t_node				*node_cpy(t_node *node);
 t_node				*ft_reset(t_node *node);
 t_node				*create_reserve(t_node *node);
+
+/*
+**node.c
+*/
+t_node				*new_node(void);
+t_node				*fill_node(t_node *node, char **arr);
 
 #endif

@@ -54,7 +54,7 @@ static void		create_link(t_node **node, char *name, char *link)
 	error();
 }
 
-int				link_info(int fd, char *line, t_node **node)
+int				link_info(int fd, char *line, t_node **node, char **buff)
 {
 	char	**arr;
 
@@ -71,7 +71,11 @@ int				link_info(int fd, char *line, t_node **node)
 		error();
 	}
 	else if ((get_next_line(fd, &line) == 1) && arrdel(&arr))
-		link_info(fd, line, node);
+	{
+		*buff = ft_strjoin(*buff, line);
+		*buff = ft_strjoin(*buff, "\n");
+		link_info(fd, line, node, buff);
+	}
 	else
 		return (arrdel(&arr));
 	return (1);

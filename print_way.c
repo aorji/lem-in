@@ -81,8 +81,8 @@ void	print_way(t_holder *lh, t_node *e)
 			{
 				j++;
 				(j == 1) ? 0 : ft_printf(" ");
-				tmp->next = lh->lst;
-				tmp = tmp->next;
+				tmp->next = ft_lstnew(lh->lst->content, ft_strlen(lh->lst->content));
+				tmp = tmp->next; 
 				ft_printf("L%d%s%s", i, "-", lh->lst->content);
 				lh->lst = lh->lst->next;
 			}

@@ -12,22 +12,24 @@
 
 #include "lemin.h"
 
-void	error(void)
+int		error(void)
 {
 	ft_printf("%s\n", "ERROR");
 	exit(1);
+	return (1);
 }
 
-t_farm	ft_read(int ac, char *av, t_node **head)
+t_farm	ft_read(int ac, char *av, t_node **head, char **buff)
 {
 	t_farm	f;
 	t_node	*node;
 
+	*buff = ft_strnew(0);
 	f.fd = (ac == 2) ? open(av, O_RDONLY) : 0;
 	f.way = NULL;
 	f.min = 0;
-	ants_num(&f);
-	rooms(&f, &node);
+	ants_num(&f, buff);
+	rooms(&f, &node, buff);
 	*head = node;
 	close(f.fd);
 	return (f);
@@ -77,7 +79,7 @@ static void	ft_list_reverse(t_list **begin_list)
 int		main(int ac, char **av)
 {
 	t_farm	f;
-	int i = 0;
+	int		i;
 	t_node	*s;
 	t_node	*e;
 	t_node	*node;
@@ -85,10 +87,12 @@ int		main(int ac, char **av)
 	t_list	*list;
 	t_holder *lh;
 	t_holder *head;
+	char	*buff;
 
+	i = 0;
 	lh = new_holder();
 	head = lh;
-	f = ft_read(ac, av[1], &node);
+	f = ft_read(ac, av[1], &node, &buff);
 	node = create_reserve(node);
 	reset = node_cpy(node);
 	while (i < f.ants)
@@ -105,8 +109,11 @@ int		main(int ac, char **av)
 		list = create_way(s, e, node);
 		if (f.min && (list_len(list) - f.min) > (f.ants - i))
 			list = f.way;
-		ft_list_reverse(&list);
-		list = list->next;
+		else
+		{
+			ft_list_reverse(&list);
+			list = list->next;
+		}
 		lh->lst = list;
 		lh->next = new_holder();
 		lh = lh->next;
@@ -117,9 +124,9 @@ int		main(int ac, char **av)
 		}
 		node = ft_reset(node);
 		node = del(node, list, s, e);
-		// ft_printf("%d\n", i);
 		i++;
 	}
+	ft_printf("%s\n", buff);
 	print_way(head, e);
 	return (1);
 }
