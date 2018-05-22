@@ -16,6 +16,7 @@ int		error(void)
 {
 	ft_printf("%s\n", "ERROR");
 	exit(1);
+	// system("leaks lem-in");
 	return (1);
 }
 
@@ -35,19 +36,6 @@ t_farm	ft_read(int ac, char *av, t_node **head, char **buff)
 	return (f);
 }
 
-static int	list_len(t_list *list)
-{
-	int i = 0;
-
-	while (list->next)
-	{
-		i++;
-		list = list->next;
-	}
-	return (i);
-
-}
-
 static t_holder	*new_holder()
 {
 	t_holder	*new;
@@ -56,24 +44,6 @@ static t_holder	*new_holder()
 	new->lst = ft_lstnew(NULL, 0);
 	new->next = NULL;
 	return (new);
-}
-
-static void	ft_list_reverse(t_list **begin_list)
-{
-	t_list		*curr;
-	t_list		*next;
-	t_list		*prev;
-
-	curr = *begin_list;
-	prev = NULL;
-	while (curr)
-	{
-		next = curr->next;
-		curr->next = prev;
-		prev = curr;
-		curr = next;
-	}
-	*begin_list = prev;
 }
 
 int		main(int ac, char **av)
@@ -88,12 +58,14 @@ int		main(int ac, char **av)
 	t_holder *lh;
 	t_holder *head;
 	char	*buff;
+	t_list	*tmp;
+	t_node	*tmp1;
 
 	i = 0;
 	lh = new_holder();
 	head = lh;
 	f = ft_read(ac, av[1], &node, &buff);
-	node = create_reserve(node);
+	create_reserve(&node);
 	reset = node_cpy(node);
 	while (i < f.ants)
 	{
@@ -102,7 +74,8 @@ int		main(int ac, char **av)
 		e = end(node);
 		if (e->previous == NULL)
 		{
-			(!i) ? error() : 0;
+			if (!i)
+				error();
 			node = node_cpy(reset);
 			continue ;
 		}
@@ -112,7 +85,9 @@ int		main(int ac, char **av)
 		else
 		{
 			ft_list_reverse(&list);
+			tmp = list;
 			list = list->next;
+			free(tmp);
 		}
 		lh->lst = list;
 		lh->next = new_holder();
@@ -127,6 +102,8 @@ int		main(int ac, char **av)
 		i++;
 	}
 	ft_printf("%s\n", buff);
+	ft_strdel(&buff);
 	print_way(head, e);
+	// system("leaks lem-in");
 	return (1);
 }

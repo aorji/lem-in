@@ -21,7 +21,7 @@ SRC = ft_memset.c get_next_line.c ft_bzero.c ft_putnbr_fd.c ft_lstiter.c ft_min.
 		ft_toupper.c ft_isdigit.c ft_strlcat.c ft_isalnum.c ft_isascii.c ft_atoi.c ft_isalpha.c ft_strcmp.c \
 		ft_strncmp.c ft_strstr.c ft_memcpy.c ft_strnstr.c ft_memccpy.c ft_memmove.c ft_memchr.c ft_memcmp.c ft_strlen.c \
 		ft_strdup.c ft_strcpy.c ft_strncpy.c ft_strcat.c ft_tolower.c ft_strncat.c ft_strchr.c ft_strrchr.c new_arr.c \
-		show_arr.c arrlen.c arrdel.c ft_listdisp.c
+		show_arr.c arrlen.c arrdel.c ft_listdisp.c noleak_join.c list_len.c list_reverse.c
 
 INC = includes/
 FLG = -Wall -Wextra -Werror

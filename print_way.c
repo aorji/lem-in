@@ -88,6 +88,7 @@ void	print_way(t_holder *lh, t_node *e)
 			}
 			lh = lh->next;
 		}
-		//ft_lstdel(&tmp);
+		lstdel(&start);
 	}
+	free_lh(&head);
 }

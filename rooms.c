@@ -52,8 +52,8 @@ int				rooms(t_farm *f, t_node **head, char **buff)
 	*head = node;
 	while (get_next_line(f->fd, &line) == 1)
 	{
-		*buff = ft_strjoin(*buff, line);
-		*buff = ft_strjoin(*buff, "\n");
+		*buff = noleak_strjoin(*buff, line, buff);
+		*buff = noleak_strjoin(*buff, "\n", buff);
 		arr = ft_strsplit(line, ' ');
 		if (!ft_strcmp(line, "##start"))
 			node->start = 1;
@@ -67,13 +67,14 @@ int				rooms(t_farm *f, t_node **head, char **buff)
 			check_repeat(arr[0], *head);
 			node = fill_room(node, arr);
 			node = node->next;
-			arrdel(&arr);
+			// arrdel(&arr);
 		}
-		else if (line[0] == '#')
+		else if (line[0] == '#' && ft_strdel(&line) && arrdel(&arr))
 			continue ;
 		else
-			return (link_info(f->fd, line, head, buff));
+			return (arrdel(&arr) && link_info(f->fd, &line, head, buff));
 		arrdel(&arr);
+		ft_strdel(&line);
 	}
 	error();
 	return (1);
@@ -86,13 +87,20 @@ void			ants_num(t_farm *f, char **buff)
 
 	if (get_next_line(f->fd, &line) == 1)
 	{
-		*buff = ft_strjoin(*buff, line);
-		*buff = ft_strjoin(*buff, "\n");
+		*buff = noleak_strjoin(*buff, line, buff);
+		*buff = noleak_strjoin(*buff, "\n", buff);
 		if (isnum(line) && ((n = ft_atoi(line)) > 0))
 			f->ants = n;
 		else if (line[0] == '#')
+		{
+			ft_strdel(&line);
 			ants_num(f, buff);
+		}
 		else
+		{
+			ft_strdel(&line);
 			error();
+		}
+		ft_strdel(&line);
 	}
 }

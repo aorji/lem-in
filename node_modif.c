@@ -50,16 +50,14 @@ t_node	*ft_reset(t_node *node)
 	return (head);
 }
 
-t_node	*create_reserve(t_node *node)
+void	create_reserve(t_node **node)
 {
 	t_node	*head;
 
-	head = node;
-
-	while(node->next)
+	head = *node;
+	while(head->next)
 	{
-		node->reserve = node->kid;
-		node = node->next;
+		head->reserve = head->kid;
+		head = head->next;
 	}
-	return (head);
 }

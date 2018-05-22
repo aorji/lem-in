@@ -54,10 +54,12 @@ static void		create_link(t_node **node, char *name, char *link)
 	error();
 }
 
-int				link_info(int fd, char *line, t_node **node, char **buff)
+int				link_info(int fd, char **l, t_node **node, char **buff)
 {
 	char	**arr;
+	char 	*line;
 
+	line = *l;
 	arr = ft_strsplit(line, '-');
 	check_dash(line);
 	if (arrlen(arr) == 2)
@@ -67,16 +69,17 @@ int				link_info(int fd, char *line, t_node **node, char **buff)
 	}
 	if ((arrlen(arr) != 2) && !(line[0] == '#'))
 	{
+		ft_strdel(&line);
 		arrdel(&arr);
 		error();
 	}
-	else if ((get_next_line(fd, &line) == 1) && arrdel(&arr))
+	else if (ft_strdel(&line) && (get_next_line(fd, &line) == 1) && arrdel(&arr))
 	{
-		*buff = ft_strjoin(*buff, line);
-		*buff = ft_strjoin(*buff, "\n");
-		link_info(fd, line, node, buff);
+		*buff = noleak_strjoin(*buff, line, buff);
+		*buff = noleak_strjoin(*buff, "\n", buff);
+		link_info(fd, &line, node, buff);
 	}
 	else
-		return (arrdel(&arr));
+		return (ft_strdel(&line) && arrdel(&arr));
 	return (1);
 }

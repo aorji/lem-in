@@ -102,4 +102,7 @@ int					arrlen(char **arr);
 char				**new_arr(int n, int m);
 int					arrdel(char ***arr);
 void				ft_listdisp(t_list *list);
+char				*noleak_strjoin(char const *s1, char const *s2, char **free);
+int					list_len(t_list *list);
+void				ft_list_reverse(t_list **begin_list);
 #endif

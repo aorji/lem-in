@@ -81,7 +81,7 @@ t_node				*new_node(void);
 /*
 **links.c
 */
-int					link_info(int fd, char *line, t_node **node, char **buff);
+int					link_info(int fd, char **line, t_node **node, char **buff);
 
 /*
 **find_way.c
@@ -107,7 +107,7 @@ t_node				*del(t_node *node, t_list *list, t_node *s, t_node *e);
 */
 t_node				*node_cpy(t_node *node);
 t_node				*ft_reset(t_node *node);
-t_node				*create_reserve(t_node *node);
+void				create_reserve(t_node **node);
 
 /*
 **node.c
@@ -115,4 +115,10 @@ t_node				*create_reserve(t_node *node);
 t_node				*new_node(void);
 t_node				*fill_node(t_node *node, char **arr);
 
+/*
+**free.c
+*/
+int					free_node(t_node **node);
+int					free_lh(t_holder **lh);
+void	lstdel(t_list **list);
 #endif
