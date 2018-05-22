@@ -66,7 +66,8 @@ int					error();
 /*
 **validation.c
 */
-int					isnum(char *s);
+void				check_repeat(char *arr, t_node *head);
+void				check_doub(t_node **h, int i, int j);
 void				check_spaces(char *line);
 void				check_dash(char *line);
 int					check_elem(char *a, char *b, char *c);
@@ -120,5 +121,5 @@ t_node				*fill_node(t_node *node, char **arr);
 */
 int					free_node(t_node **node);
 int					free_lh(t_holder **lh);
-void	lstdel(t_list **list);
+void				lstdel(t_list **list);
 #endif

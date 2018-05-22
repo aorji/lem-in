@@ -14,24 +14,37 @@
 
 int	free_node(t_node **n)
 {
-	t_node *node;
+	t_node	*node;
+	t_node	*tmp;
+	t_kids	*k_tmp;
 
 	node = *n;
 	while (node)
 	{
-		(node->name) ? free(node->name) : 0;
-		while (node->kid)
+		if (node->name)
 		{
-			(node->kid->name) ? free(node->kid->name) : 0;
-			node->kid = node->kid->next;
+			free(node->name);
+			while (node->kid)
+			{
+				if (node->kid->name)
+					free(node->kid->name);
+				k_tmp = node->kid; 
+				node->kid = node->kid->next;
+				free(k_tmp);
+			}
+			while (node->reserve)
+			{
+				if (node->reserve->name)
+					free(node->reserve->name);
+				k_tmp = node->reserve;
+				node->reserve = node->reserve->next;
+				free(k_tmp);
+			}
+			tmp = node;
+			node = node->next;
+			free(tmp);
 		}
-		free(node->kid);
-		while (node->reserve)
-		{
-			(node->reserve->name) ? free(node->reserve->name) : 0;
-			node->reserve = node->reserve->next;
-		}
-		node = node->next;
+		free(node);
 	}
 	return (1);
 }

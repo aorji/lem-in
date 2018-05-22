@@ -15,7 +15,7 @@
 static t_kids	*new_kid(void)
 {
 	t_kids	*new;
-	
+
 	new = (t_kids*)malloc(sizeof(t_kids));
 	new->next = NULL;
 	return (new);
@@ -57,7 +57,7 @@ static void		create_link(t_node **node, char *name, char *link)
 int				link_info(int fd, char **l, t_node **node, char **buff)
 {
 	char	**arr;
-	char 	*line;
+	char	*line;
 
 	line = *l;
 	arr = ft_strsplit(line, '-');

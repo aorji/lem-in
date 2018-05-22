@@ -14,7 +14,7 @@
 
 t_node	*end(t_node *node)
 {
-	int	i;
+	int		i;
 	t_node	*end;
 
 	i = 0;
@@ -33,7 +33,7 @@ t_node	*end(t_node *node)
 
 t_node	*start(t_node *node)
 {
-	int i;
+	int		i;
 	t_node	*start;
 
 	i = 0;
@@ -50,7 +50,7 @@ t_node	*start(t_node *node)
 	return (start);
 }
 
-void	find_way(t_node **node, t_node *current) 
+void	find_way(t_node **node, t_node *current)
 {
 	t_node	*tmp;
 

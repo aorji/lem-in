@@ -14,7 +14,7 @@
 
 t_node	*node_cpy(t_node *node)
 {
-	t_node *head;
+	t_node	*head;
 	t_node	*reset;
 
 	reset = new_node();
@@ -55,7 +55,7 @@ void	create_reserve(t_node **node)
 	t_node	*head;
 
 	head = *node;
-	while(head->next)
+	while (head->next)
 	{
 		head->reserve = head->kid;
 		head = head->next;

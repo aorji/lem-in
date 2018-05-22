@@ -12,14 +12,6 @@
 
 #include "lemin.h"
 
-int		isnum(char *s)
-{
-	if ((ft_atoi(s) != 0 || !ft_strcmp(s, "0")) &&
-	(ft_digitsize(ft_atoi(s)) == ft_strlen(s)))
-		return (1);
-	return (0);
-}
-
 void	check_spaces(char *line)
 {
 	int i;
@@ -57,4 +49,28 @@ int		check_elem(char *a, char *b, char *c)
 		return (1);
 	error();
 	return (0);
+}
+
+void	check_repeat(char *arr, t_node *head)
+{
+	while (head->next)
+	{
+		if (!ft_strcmp(head->name, arr))
+			error();
+		head = head->next;
+	}
+}
+
+void	check_doub(t_node **h, int i, int j)
+{
+	t_node	*head;
+
+	head = *h;
+	while (head)
+	{
+		if ((head->x == i) && (head->y == j))
+			error();
+		head = head->next;
+	}
+	// free_node(h);
 }

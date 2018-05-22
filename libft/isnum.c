@@ -1,26 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   list_len.c                                         :+:      :+:    :+:   */
+/*   isnum.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aorji <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/22 17:48:55 by aorji             #+#    #+#             */
-/*   Updated: 2018/05/22 17:49:17 by aorji            ###   ########.fr       */
+/*   Created: 2018/05/22 19:23:56 by aorji             #+#    #+#             */
+/*   Updated: 2018/05/22 19:23:57 by aorji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	list_len(t_list *list)
+int		isnum(char *s)
 {
-	int i;
-
-	i = 0;
-	while (list->next)
-	{
-		i++;
-		list = list->next;
-	}
-	return (i);
+	if ((ft_atoi(s) != 0 || !ft_strcmp(s, "0")) &&
+	(ft_digitsize(ft_atoi(s)) == (int)ft_strlen(s)))
+		return (1);
+	return (0);
 }
