@@ -23,29 +23,52 @@ int	free_node(t_node **n)
 	{
 		if (node->name)
 		{
-			free(node->name);
+			ft_strdel(&(node->name));
 			while (node->kid)
 			{
 				if (node->kid->name)
-					free(node->kid->name);
-				k_tmp = node->kid; 
-				node->kid = node->kid->next;
-				free(k_tmp);
+					ft_strdel(&(node->kid->name));
+				k_tmp = node->kid->next; 
+				free(node->kid);
+				node->kid = NULL;
+				node->kid = k_tmp;
 			}
-			while (node->reserve)
-			{
-				if (node->reserve->name)
-					free(node->reserve->name);
-				k_tmp = node->reserve;
-				node->reserve = node->reserve->next;
-				free(k_tmp);
-			}
-			tmp = node;
-			node = node->next;
-			free(tmp);
 		}
+		tmp = node->next;
 		free(node);
+		node = NULL;
+		node = tmp;
 	}
+	*n = NULL;
+	return (1);
+}
+
+int	free_br(t_node *node)
+{
+	t_node	*tmp;
+	t_kids	*k_tmp;
+
+	while (node)
+	{
+		// if (node->name)
+		// {
+		// 	ft_strdel(&(node->name));
+		// 	while (node->kid)
+		// 	{
+		// 		if (node->kid->name)
+		// 			ft_strdel(&(node->kid->name));
+		// 		k_tmp = node->kid->next; 
+		// 		free(node->kid);
+		// 		node->kid = NULL;
+		// 		node->kid = k_tmp;
+		// 	}
+		// }
+		tmp = node->next;
+		free(node);
+		node = NULL;
+		node = tmp;
+	}
+	node = NULL;
 	return (1);
 }
 

@@ -101,13 +101,13 @@ void				print_way(t_holder *lh, t_node *e);
 /*
 **new_way.c
 */
-t_node				*del(t_node *node, t_list *list, t_node *s, t_node *e);
+void				del(t_node **n, t_list *list, t_node *s, t_node *e);
 
 /*
 **node_modif.c
 */
 t_node				*node_cpy(t_node *node);
-t_node				*ft_reset(t_node *node);
+void				ft_reset(t_node **node);
 void				create_reserve(t_node **node);
 
 /*
@@ -120,6 +120,10 @@ t_node				*fill_node(t_node *node, char **arr);
 **free.c
 */
 int					free_node(t_node **node);
+int	free_br(t_node *node);
 int					free_lh(t_holder **lh);
 void				lstdel(t_list **list);
+
+
+void	print_node(t_node *node);
 #endif

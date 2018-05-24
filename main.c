@@ -76,7 +76,9 @@ int		main(int ac, char **av)
 		{
 			if (!i)
 				error();
+			tmp1 = node;
 			node = node_cpy(reset);
+			free_br(tmp1);
 			continue ;
 		}
 		list = create_way(s, e, node);
@@ -97,13 +99,14 @@ int		main(int ac, char **av)
 			f.way = list;
 			f.min = list_len(list);
 		}
-		node = ft_reset(node);
-		node = del(node, list, s, e);
+		ft_reset(&node);
+		del(&node, list, s, e);
 		i++;
 	}
 	ft_printf("%s\n", buff);
 	ft_strdel(&buff);
 	print_way(head, e);
+	// free_node(&node);
 	system("leaks lem-in");
 	return (1);
 }

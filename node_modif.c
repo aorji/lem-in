@@ -35,19 +35,18 @@ t_node	*node_cpy(t_node *node)
 	return (head);
 }
 
-t_node	*ft_reset(t_node *node)
+void	ft_reset(t_node **node)
 {
 	t_node *head;
 
-	head = node;
-	while (node->next)
+	head = *node;
+	while (head->next)
 	{
-		node->step = 0;
-		node->previous = NULL;
-		node->kid = node->reserve;
-		node = node->next;
+		head->step = 0;
+		head->previous = NULL;
+		head->kid = head->reserve;
+		head = head->next;
 	}
-	return (head);
 }
 
 void	create_reserve(t_node **node)

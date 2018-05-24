@@ -29,6 +29,7 @@ static void		create_room(char **arr, char *line, t_node **head, t_node **node)
 	check_spaces(line);
 	tmp = node_cpy(*head);
 	check_doub(&tmp, ft_atoi(arr[1]), ft_atoi(arr[2]));
+	free_br(tmp);
 	check_repeat(arr[0], *head);
 	*node = fill_room(*node, arr);
 	*node = (*node)->next;

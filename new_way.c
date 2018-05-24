@@ -12,13 +12,15 @@
 
 #include "lemin.h"
 
-t_node	*del(t_node *node, t_list *list, t_node *s, t_node *e)
+void	del(t_node **n, t_list *list, t_node *s, t_node *e)
 {
 	t_list	*head;
 	t_node	*tmp;
 	t_node	*new;
+	t_node	*node;
 	
 	head = list;
+	node = *n;
 	while (list->next && node->next && !node->start && !node->end)
 	{
 		if (!ft_strcmp(node->name, list->content))
@@ -51,5 +53,5 @@ t_node	*del(t_node *node, t_list *list, t_node *s, t_node *e)
 		}
 		node = node->next;
 	}
-	return (new);
+	*n = new;
 }

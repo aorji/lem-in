@@ -16,9 +16,9 @@ void	print_node(t_node *node)
 		// 	printf("linked with = %s\n", node->kid->name);
 		// 	node->kid = node->kid->next;
 		// }
-		printf("\n");
 		node = node->next;
 	}
+		printf("\n");
 }
 
 // static void	print_way(t_node *s, t_node *e, t_node *node)
