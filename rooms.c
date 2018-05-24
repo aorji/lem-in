@@ -53,11 +53,11 @@ int				rooms(t_farm *f, t_node **head, char **buff)
 		(!ft_strcmp(line, "##end")) ? node->end = 1 : 0;
 		if (arrlen(arr) == 3 && isnum(arr[1]) && isnum(arr[2]))
 			create_room(arr, line, head, &node);
-		else if (line[0] == '#' && ft_strdel(&line) && arrdel(&arr))
+		else if (line[0] == '#' && ft_strdel(&line) && arrdel(arr))
 			continue ;
 		else
-			return (arrdel(&arr) && link_info(f->fd, &line, head, buff));
-		arrdel(&arr);
+			return (arrdel(arr) && link_info(f->fd, &line, head, buff));
+		arrdel(arr);
 		ft_strdel(&line);
 	}
 	error();
@@ -83,6 +83,7 @@ void			ants_num(t_farm *f, char **buff)
 		else
 		{
 			ft_strdel(&line);
+			ft_strdel(buff);
 			error();
 		}
 		ft_strdel(&line);

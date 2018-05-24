@@ -119,10 +119,12 @@ t_node				*fill_node(t_node *node, char **arr);
 /*
 **free.c
 */
-int					free_node(t_node **node);
+
+int	free_node(t_node *node);
 int	free_br(t_node *node);
 int					free_lh(t_holder **lh);
 void				lstdel(t_list **list);
+void	free_start(t_list *lst);
 
 
 void	print_node(t_node *node);

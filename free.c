@@ -12,13 +12,11 @@
 
 #include "lemin.h"
 
-int	free_node(t_node **n)
+int	free_node(t_node *node)
 {
-	t_node	*node;
 	t_node	*tmp;
 	t_kids	*k_tmp;
 
-	node = *n;
 	while (node)
 	{
 		if (node->name)
@@ -34,12 +32,11 @@ int	free_node(t_node **n)
 				node->kid = k_tmp;
 			}
 		}
-		tmp = node->next;
-		free(node);
-		node = NULL;
-		node = tmp;
+		tmp = node;
+		node = node->next;
+		free(tmp);
+		tmp = NULL;
 	}
-	*n = NULL;
 	return (1);
 }
 
@@ -50,19 +47,6 @@ int	free_br(t_node *node)
 
 	while (node)
 	{
-		// if (node->name)
-		// {
-		// 	ft_strdel(&(node->name));
-		// 	while (node->kid)
-		// 	{
-		// 		if (node->kid->name)
-		// 			ft_strdel(&(node->kid->name));
-		// 		k_tmp = node->kid->next; 
-		// 		free(node->kid);
-		// 		node->kid = NULL;
-		// 		node->kid = k_tmp;
-		// 	}
-		// }
 		tmp = node->next;
 		free(node);
 		node = NULL;
@@ -102,3 +86,18 @@ void	lstdel(t_list **list)
 	free(lst);
 	lst = NULL;
 }
+
+void	free_start(t_list *lst)
+{
+	t_list	*tmp;
+
+	while (lst)
+	{
+		(lst->content) ? free(lst->content) : 0;
+		tmp = lst;
+		lst = lst->next;
+		free(tmp);
+		tmp = NULL;
+	}
+}
+

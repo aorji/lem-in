@@ -28,19 +28,20 @@ t_list	*create_way(t_node *s, t_node *e, t_node *node)
 	t_node	*head;
 	t_list	*list;
 	t_list	*head_l;
+	char	*tmp;
 
 	head = node;
 	if (!(e->previous))
 		return(NULL);
-	list = ft_lstnew(NULL, 0);
+	list = (t_list *)malloc(sizeof(t_list));
 	head_l = list;
 	list->content = e->name;
-	list->next = ft_lstnew(NULL, 0);
+	list->next = (t_list *)malloc(sizeof(t_list));
 	list = list->next;
 	while (ft_strcmp(e->previous, s->name))
 	{
 		list->content = e->previous;
-		list->next = ft_lstnew(NULL, 0);
+		list->next = (t_list *)malloc(sizeof(t_list));
 		list = list->next;
 		e = previous(head, e->previous);
 	}
@@ -88,7 +89,6 @@ void	print_way(t_holder *lh, t_node *e)
 			}
 			lh = lh->next;
 		}
-		lstdel(&start);
+		free_start(start);
 	}
-	free_lh(&head);
 }

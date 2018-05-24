@@ -12,20 +12,17 @@
 
 #include "libft.h"
 
-int	arrdel(char ***array)
+int	arrdel(char **arr)
 {
-	char	**arr;
+	int i;
 
-	arr = *array;
-	if (arr)
+	i = 0;
+	while (arr[i])
 	{
-		while (*arr)
-		{
-			free(*arr);
-			*arr = NULL;
-			arr++;
-		}
+		ft_strdel(&(arr[i]));
+		i++;
 	}
+	free(arr);
 	arr = NULL;
 	return (1);
 }

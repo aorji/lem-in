@@ -70,16 +70,16 @@ int				link_info(int fd, char **l, t_node **node, char **buff)
 	if ((arrlen(arr) != 2) && !(line[0] == '#'))
 	{
 		ft_strdel(&line);
-		arrdel(&arr);
+		arrdel(arr);
 		error();
 	}
-	else if (ft_strdel(&line) && (get_next_line(fd, &line) == 1) && arrdel(&arr))
+	else if (ft_strdel(&line) && (get_next_line(fd, &line) == 1) && arrdel(arr))
 	{
 		*buff = noleak_strjoin(*buff, line, buff);
 		*buff = noleak_strjoin(*buff, "\n", buff);
 		link_info(fd, &line, node, buff);
 	}
 	else
-		return (ft_strdel(&line) && arrdel(&arr));
+		return (ft_strdel(&line) && arrdel(arr));
 	return (1);
 }
