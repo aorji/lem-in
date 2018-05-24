@@ -43,7 +43,7 @@ void	del(t_node **n, t_list *list, t_node *s, t_node *e)
 			if (!ft_strcmp(node->next->name, list->content) && !(node->next->start) && !(node->next->end))
 			{
 				tmp = node->next;
-				(node->next->next) ? (node->next = node->next->next) : (node->next = NULL);
+				// (node->next->next) ? (node->next = node->next->next) : (node->next = NULL);
 				node->next = node->next->next;
 				list = head;
 				free(tmp);

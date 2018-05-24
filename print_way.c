@@ -25,12 +25,10 @@ static int check_written(t_list *tmp, char *s, char *end)
 
 t_list	*create_way(t_node *s, t_node *e, t_node *node)
 {
-	t_node	*head;
 	t_list	*list;
 	t_list	*head_l;
 	char	*tmp;
 
-	head = node;
 	if (!(e->previous))
 		return(NULL);
 	list = (t_list *)malloc(sizeof(t_list));
@@ -41,9 +39,10 @@ t_list	*create_way(t_node *s, t_node *e, t_node *node)
 	while (ft_strcmp(e->previous, s->name))
 	{
 		list->content = e->previous;
+		e = previous(node, e->previous);
 		list->next = (t_list *)malloc(sizeof(t_list));
+		list->next->next = NULL;
 		list = list->next;
-		e = previous(head, e->previous);
 	}
 	return (head_l);
 }

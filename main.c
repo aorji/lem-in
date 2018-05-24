@@ -103,6 +103,6 @@ int		main(int ac, char **av)
 	ft_printf("%s\n", buff);
 	ft_strdel(&buff);
 	print_way(head, e);
-	// system("leaks lem-in");
+	system("leaks lem-in");
 	return (1);
 }
