@@ -60,6 +60,7 @@ void	print_way(t_holder *lh, t_node *e)
 {
 	t_holder	*head;
 	t_list		*tmp;
+	t_list	*tmp2;
 	t_list		*start;
 	int i;
 	int j;
@@ -86,10 +87,12 @@ void	print_way(t_holder *lh, t_node *e)
 				tmp->next = ft_lstnew(lh->lst->content, ft_strlen(lh->lst->content));
 				tmp = tmp->next; 
 				ft_printf("L%d%s%s", i, "-", lh->lst->content);
-				lh->lst = lh->lst->next;
+				tmp2 = lh->lst;
+				lh->lst = lh->lst->next;	
 			}
 			lh = lh->next;
 		}
 		free_start(start);
 	}
+	// free_lh(head);
 }

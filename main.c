@@ -41,6 +41,7 @@ static t_holder	*new_holder()
 	t_holder	*new;
 
 	new = (t_holder *)malloc(sizeof(t_holder));
+	// new->lst = NULL;
 	new->next = NULL;
 	return (new);
 }
@@ -58,7 +59,9 @@ int		main(int ac, char **av)
 	t_holder *head;
 	char	*buff;
 	t_list	*tmp;
+	t_list	*tmp3;
 	t_node	*tmp1;
+	t_node	*tmp2;
 
 	i = 0;
 	lh = new_holder();
@@ -75,7 +78,14 @@ int		main(int ac, char **av)
 		{
 			if (!i)
 				error();
+			tmp1 = node;
 			node = node_cpy(reset);
+			while (tmp1)
+			{
+				tmp2 = tmp1;
+				tmp1 = tmp1->next;
+				free(tmp2);
+			}
 			continue ;
 		}
 		list = create_way(s, e, node);
@@ -103,6 +113,6 @@ int		main(int ac, char **av)
 	ft_printf("%s\n", buff);
 	ft_strdel(&buff);
 	print_way(head, e);
-	// system("leaks lem-in");
+	// system("leaks -q lem-in");
 	return (1);
 }
