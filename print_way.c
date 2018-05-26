@@ -32,9 +32,11 @@ t_list	*create_way(t_node *s, t_node *e, t_node *node)
 	if (!(e->previous))
 		return(NULL);
 	list = (t_list *)malloc(sizeof(t_list));
+	list->next = NULL;
 	head_l = list;
 	list->content = e->name;
 	list->next = (t_list *)malloc(sizeof(t_list));
+	list->next->next = NULL;
 	list = list->next;
 	while (ft_strcmp(e->previous, s->name))
 	{
