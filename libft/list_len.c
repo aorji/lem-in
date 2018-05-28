@@ -17,7 +17,7 @@ int	list_len(t_list *list)
 	int i;
 
 	i = 0;
-	while (list->next)
+	while (list)
 	{
 		i++;
 		list = list->next;

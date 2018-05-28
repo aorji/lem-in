@@ -53,6 +53,7 @@ typedef	struct		s_map
 typedef	struct		s_holder
 {
 	t_list			*lst;
+	t_list			*res;
 	struct s_holder	*next;
 }					t_holder;
 
@@ -122,8 +123,8 @@ t_node				*fill_node(t_node *node, char **arr);
 
 int	free_node(t_node *node);
 int	free_br(t_node *node);
+void	lstdel(t_list *lst);
 int					free_lh(t_holder *lh);
-void				lstdel(t_list **list);
 void	free_start(t_list *lst);
 
 

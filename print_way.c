@@ -94,5 +94,4 @@ void	print_way(t_holder *lh, t_node *e)
 		}
 		free_start(start);
 	}
-	// free_lh(head);
 }

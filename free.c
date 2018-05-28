@@ -56,22 +56,18 @@ int	free_br(t_node *node)
 	return (1);
 }
 
-// static void	lstdel(t_list *list)
-// {
-// 	t_list	*lst;
-// 	t_list	*tmp;
+void	lstdel(t_list *lst)
+{
+	t_list	*tmp;
 
-// 	lst = *list;
-// 	while (lst)
-// 	{
-// 		(lst->content) ? free(lst->content) : 0;
-// 		tmp = lst;
-// 		lst = lst->next;
-// 		free(tmp);
-// 	}
-// 	free(lst);
-// 	lst = NULL;
-// }
+	while (lst)
+	{
+		tmp = lst;
+		lst = lst->next;
+		free(tmp);
+		tmp = NULL;
+	}
+}
 
 int	free_lh(t_holder *lh)
 {
@@ -80,6 +76,7 @@ int	free_lh(t_holder *lh)
 
 	while (lh)
 	{
+		lstdel(lh->res);
 		tmp = lh;
 		lh = lh->next;
 		free(tmp);

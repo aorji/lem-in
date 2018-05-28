@@ -16,7 +16,6 @@ int		error(void)
 {
 	ft_printf("%s\n", "ERROR");
 	exit(1);
-	// system("leaks lem-in");
 	return (1);
 }
 
@@ -41,7 +40,6 @@ static t_holder	*new_holder()
 	t_holder	*new;
 
 	new = (t_holder *)malloc(sizeof(t_holder));
-	// new->lst = NULL;
 	new->next = NULL;
 	return (new);
 }
@@ -89,7 +87,7 @@ int		main(int ac, char **av)
 			continue ;
 		}
 		list = create_way(s, e, node);
-		if (f.min && (list_len(list) - f.min) > (f.ants - i))
+		if (f.min && ((list_len(list) - 1)- f.min) > (f.ants - i))
 			list = f.way;
 		else
 		{
@@ -99,6 +97,7 @@ int		main(int ac, char **av)
 			free(tmp);
 		}
 		lh->lst = list;
+		lh->res = list; //tut
 		lh->next = new_holder();
 		lh = lh->next;
 		if (!i)
@@ -113,6 +112,5 @@ int		main(int ac, char **av)
 	ft_printf("%s\n", buff);
 	ft_strdel(&buff);
 	print_way(head, e);
-	// system("leaks -q lem-in");
 	return (1);
 }
