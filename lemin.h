@@ -123,4 +123,9 @@ t_node				*fill_node(t_node *node, char **arr);
 int					free_br(t_node *node);
 void				free_start(t_list *lst);
 
+/*
+**create_result.c
+*/
+t_holder			*loop(t_farm *f, t_node **node, t_node *reset);
+
 #endif
