@@ -21,7 +21,8 @@ static t_node	*fill_room(t_node *node, char **arr)
 	return (node);
 }
 
-static void		create_room(char **arr, char *line, t_node **head, t_node **node)
+static void		create_room(char **arr, char *line,
+	t_node **head, t_node **node)
 {
 	t_node *tmp;
 

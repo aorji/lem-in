@@ -70,8 +70,7 @@ int				link_info(int fd, char **l, t_node **node, char **buff)
 	if ((arrlen(arr) != 2) && !(line[0] == '#'))
 	{
 		ft_strdel(&line);
-		arrdel(arr);
-		error();
+		error(arrdel(arr));
 	}
 	else if (ft_strdel(&line) && (get_next_line(fd, &line) == 1) && arrdel(arr))
 	{

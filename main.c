@@ -12,17 +12,17 @@
 
 #include "lemin.h"
 
-int		error(void)
+int				error(void)
 {
 	ft_printf("%s\n", "ERROR");
 	exit(1);
 	return (1);
 }
 
-t_farm	ft_read(int ac, char *av, t_node **head, char **buff)
+t_farm			ft_read(int ac, char *av, t_node **head, char **buff)
 {
-	t_farm	f;
-	t_node	*node;
+	t_farm		f;
+	t_node		*node;
 
 	*buff = ft_strnew(0);
 	f.fd = (ac == 2) ? open(av, O_RDONLY) : 0;
@@ -35,7 +35,7 @@ t_farm	ft_read(int ac, char *av, t_node **head, char **buff)
 	return (f);
 }
 
-static t_holder	*new_holder()
+static t_holder	*new_holder(void)
 {
 	t_holder	*new;
 
@@ -44,22 +44,22 @@ static t_holder	*new_holder()
 	return (new);
 }
 
-int		main(int ac, char **av)
+int				main(int ac, char **av)
 {
-	t_farm	f;
-	int		i;
-	t_node	*s;
-	t_node	*e;
-	t_node	*node;
-	t_node	*reset;
-	t_list	*list;
-	t_holder *lh;
-	t_holder *head;
-	char	*buff;
-	t_list	*tmp;
-	t_list	*tmp3;
-	t_node	*tmp1;
-	t_node	*tmp2;
+	t_farm		f;
+	int			i;
+	t_node		*s;
+	t_node		*e;
+	t_node		*node;
+	t_node		*reset;
+	t_list		*list;
+	t_holder	*lh;
+	t_holder	*head;
+	char		*buff;
+	t_list		*tmp;
+	t_list		*tmp3;
+	t_node		*tmp1;
+	t_node		*tmp2;
 
 	i = 0;
 	lh = new_holder();
@@ -87,7 +87,7 @@ int		main(int ac, char **av)
 			continue ;
 		}
 		list = create_way(s, e, node);
-		if (f.min && ((list_len(list) - 1)- f.min) > (f.ants - i))
+		if (f.min && ((list_len(list) - 1) - f.min) > (f.ants - i))
 			list = f.way;
 		else
 		{
@@ -97,7 +97,7 @@ int		main(int ac, char **av)
 			free(tmp);
 		}
 		lh->lst = list;
-		lh->res = list; //tut
+		lh->res = list;
 		lh->next = new_holder();
 		lh = lh->next;
 		if (!i)

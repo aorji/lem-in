@@ -72,5 +72,4 @@ void	check_doub(t_node **h, int i, int j)
 			error();
 		head = head->next;
 	}
-	// free_node(h);
 }

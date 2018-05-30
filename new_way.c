@@ -12,13 +12,41 @@
 
 #include "lemin.h"
 
-void	del(t_node **n, t_list *list, t_node *s, t_node *e)
+static void	remaining(t_node **n, t_list *head)
+{
+	t_node	*node;
+	t_list	*list;
+	t_node	*tmp;
+
+	node = *n;
+	while (node->next && node->next->next)
+	{
+		list = head;
+		while (list->next && node->next && !node->next->start &&
+			!node->next->end && node->next->next)
+		{
+			if (!ft_strcmp(node->next->name, list->content) &&
+				!(node->next->start) && !(node->next->end))
+			{
+				tmp = node->next;
+				node->next = node->next->next;
+				list = head;
+				free(tmp);
+			}
+			else
+				list = list->next;
+		}
+		node = node->next;
+	}
+}
+
+void		del(t_node **n, t_list *list, t_node *s, t_node *e)
 {
 	t_list	*head;
 	t_node	*tmp;
 	t_node	*new;
 	t_node	*node;
-	
+
 	head = list;
 	node = *n;
 	while (list->next && node->next && !node->start && !node->end)
@@ -34,24 +62,6 @@ void	del(t_node **n, t_list *list, t_node *s, t_node *e)
 			list = list->next;
 	}
 	new = node;
-	while (node->next && node->next->next)
-	{
-		list = head;
-				// ft_printf("%s\n", head->content);
-		while (list->next && node->next && !node->next->start && !node->next->end && node->next->next)
-		{
-			if (!ft_strcmp(node->next->name, list->content) && !(node->next->start) && !(node->next->end))
-			{
-				tmp = node->next;
-				// (node->next->next) ? (node->next = node->next->next) : (node->next = NULL);
-				node->next = node->next->next;
-				list = head;
-				free(tmp);
-			}
-			else
-				list = list->next;
-		}
-		node = node->next;
-	}
+	remaining(&node, head);
 	*n = new;
 }
