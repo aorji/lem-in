@@ -56,15 +56,12 @@ t_node		*previous(t_node *head, char *name)
 	return (head);
 }
 
-void		print_way(t_holder *lh, t_node *e)
+void		print_way(t_holder *lh, t_node *e, int i, int k)
 {
 	t_holder	*head;
 	t_list		*tmp;
-	t_list		*tmp2;
 	t_list		*start;
-	int			i;
 	int			j;
-	int			k;
 
 	k = 0;
 	j = 1;
@@ -88,7 +85,6 @@ void		print_way(t_holder *lh, t_node *e)
 					ft_strlen(lh->lst->content));
 				tmp = tmp->next;
 				ft_printf("L%d%s%s", i, "-", lh->lst->content);
-				tmp2 = lh->lst;
 				lh->lst = lh->lst->next;
 			}
 			lh = lh->next;

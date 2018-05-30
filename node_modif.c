@@ -35,7 +35,7 @@ t_node	*node_cpy(t_node *node)
 	return (head);
 }
 
-void	ft_reset(t_node **node, t_list *list, t_node *s, t_node *e)
+int		ft_reset(t_node **node, t_list *list, t_node *s, t_node *e)
 {
 	t_node *head;
 
@@ -48,6 +48,7 @@ void	ft_reset(t_node **node, t_list *list, t_node *s, t_node *e)
 		head = head->next;
 	}
 	del(node, list, s, e);
+	return (1);
 }
 
 void	create_reserve(t_node **node)

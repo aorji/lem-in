@@ -90,14 +90,14 @@ int					link_info(int fd, char **line, t_node **node, char **buff);
 */
 t_node				*end(t_node *node);
 t_node				*start(t_node *node);
-void				find_way(t_node **node, t_node *current);
+void				find_way(t_node **node, t_node *current, t_node *tmp);
 
 /*
 **print_way.c
 */
 t_node				*previous(t_node *head, char *name);
 t_list				*create_way(t_node *s, t_node *e, t_node *node);
-void				print_way(t_holder *lh, t_node *e);
+void				print_way(t_holder *lh, t_node *e, int i, int k);
 
 /*
 **new_way.c
@@ -108,7 +108,7 @@ void				del(t_node **n, t_list *list, t_node *s, t_node *e);
 **node_modif.c
 */
 t_node				*node_cpy(t_node *node);
-void				ft_reset(t_node **node, t_list *list, t_node *s, t_node *e);
+int					ft_reset(t_node **node, t_list *list, t_node *s, t_node *e);
 void				create_reserve(t_node **node);
 
 /*
@@ -122,10 +122,23 @@ t_node				*fill_node(t_node *node, char **arr);
 */
 int					free_br(t_node *node);
 void				free_start(t_list *lst);
+void				free_node(t_node *tmp1);
 
 /*
 **create_result.c
 */
-t_holder			*loop(t_farm *f, t_node **node, t_node *reset);
+t_holder			*loop(t_farm *f, t_node **node, t_node *reset, int i);
 
+/*
+**list_holder.c
+*/
+t_holder			*new_holder(void);
+void				fill_holder(t_holder **lh, t_list **list);
+
+/*
+**help_find_way.c
+*/
+t_node				*create_current(t_node *tmp, t_node *current);
+t_node				*next_kid(t_node *current);
+t_node				*search_next(t_node *tmp, t_node *current);
 #endif

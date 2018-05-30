@@ -50,52 +50,31 @@ t_node	*start(t_node *node)
 	return (start);
 }
 
-void	find_way(t_node **node, t_node *current)
+void	find_way(t_node **node, t_node *current, t_node *tmp)
 {
-	t_node	*tmp;
-
-	tmp = *node;
-	if (current->end)
-		return ;
-	if (!(current->kid))
+	if (current->end || !(current->kid))
 		return ;
 	while (tmp->next && ft_strcmp(tmp->name, current->kid->name))
 		tmp = tmp->next;
 	if (!(tmp->next))
 	{
-		if (current->kid->next)
-		{
-			current->kid = current->kid->next;
-			find_way(node, current);
-		}
+		(current->kid->next) ? find_way(node, next_kid(current), *node) : 0;
 		return ;
 	}
 	if (tmp->step && (tmp->step <= (current->step + 1)))
 	{
 		if (tmp->end)
 			return ;
-		current->kid = current->kid->next;
-		find_way(node, current);
-		return ;
+		return (find_way(node, next_kid(current), *node));
 	}
 	if (tmp->start)
-	{
-		current->kid = current->kid->next;
-		find_way(node, current);
-	}
+		find_way(node, next_kid(current), *node);
 	else
 	{
 		if (tmp->step > current->step + 1)
-		{
-			tmp->step = current->step + 1;
-			tmp->kid = tmp->reserve;
-			tmp->previous = current->name;
-			find_way(node, tmp);
-		}
-		tmp->step = current->step + 1;
-		tmp->previous = current->name;
-		find_way(node, tmp);
-		current->kid = current->kid->next;
-		find_way(node, current);
+			find_way(node, create_current(tmp, current), *node);
+		tmp = search_next(tmp, current);
+		find_way(node, tmp, *node);
+		find_way(node, next_kid(current), *node);
 	}
 }

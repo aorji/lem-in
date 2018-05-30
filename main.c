@@ -45,10 +45,11 @@ int				main(int ac, char **av)
 
 	f = ft_read(ac, av[1], &node, &buff);
 	create_reserve(&node);
-	head = loop(&f, &node, node_cpy(node));
+	reset = node_cpy(node);
+	head = loop(&f, &node, reset, 0);
 	ft_printf("%s\n", buff);
 	ft_strdel(&buff);
-	print_way(head, end(node));
+	print_way(head, end(node), 0, 0);
 	// system("leaks -q lem-in");
 	return (1);
 }

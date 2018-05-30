@@ -14,7 +14,8 @@ NAME	=	lem-in
 FLG		=	-Wall -Wextra -Werror
 H 		=	lemin.h
 SRC		=	main.c validation.c rooms.c links.c find_way.c node.c \
-			print_way.c new_way.c node_modif.c free.c create_result.c
+			print_way.c new_way.c node_modif.c free.c create_result.c \
+			list_holder.c help_find_way.c
 OBJ		=	$(SRC:.c=.o)
 PRNTF	=	ft_printf/libftprintf.a
 

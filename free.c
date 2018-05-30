@@ -41,3 +41,15 @@ void	free_start(t_list *lst)
 		tmp = NULL;
 	}
 }
+
+void	free_node(t_node *tmp1)
+{
+	t_node		*tmp2;
+
+	while (tmp1)
+	{
+		tmp2 = tmp1;
+		tmp1 = tmp1->next;
+		free(tmp2);
+	}
+}

@@ -21,7 +21,22 @@ static t_kids	*new_kid(void)
 	return (new);
 }
 
-static void		create_link(t_node **node, char *name, char *link)
+static int		next_tmp(t_kids **tmp, char *link)
+{
+	(*tmp)->next = new_kid();
+	(*tmp) = (*tmp)->next;
+	(*tmp)->name = ft_strcpy(ft_strnew(ft_strlen(link)), link);
+	return (1);
+}
+
+static int		next_head(t_node **head, char *link)
+{
+	(*head)->kid = new_kid();
+	(*head)->kid->name = ft_strcpy(ft_strnew(ft_strlen(link)), link);
+	return (1);
+}
+
+static int		create_link(t_node **node, char *name, char *link)
 {
 	t_node	*head;
 	t_kids	*tmp;
@@ -40,18 +55,14 @@ static void		create_link(t_node **node, char *name, char *link)
 					!ft_strcmp(tmp->name, link) ? error() : 0;
 					tmp = tmp->next;
 				}
-				tmp->next = new_kid();
-				tmp = tmp->next;
-				tmp->name = ft_strcpy(ft_strnew(ft_strlen(link)), link);
-				return ;
+				return (next_tmp(&tmp, link));
 			}
-			head->kid = new_kid();
-			head->kid->name = ft_strcpy(ft_strnew(ft_strlen(link)), link);
-			return ;
+			return (next_head(&head, link));
 		}
 		head = head->next;
 	}
 	error();
+	return (1);
 }
 
 int				link_info(int fd, char **l, t_node **node, char **buff)
