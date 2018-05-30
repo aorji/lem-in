@@ -108,7 +108,7 @@ void				del(t_node **n, t_list *list, t_node *s, t_node *e);
 **node_modif.c
 */
 t_node				*node_cpy(t_node *node);
-void				ft_reset(t_node **node);
+void				ft_reset(t_node **node, t_list *list, t_node *s, t_node *e);
 void				create_reserve(t_node **node);
 
 /*
