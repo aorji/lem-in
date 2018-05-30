@@ -56,6 +56,13 @@ t_node		*previous(t_node *head, char *name)
 	return (head);
 }
 
+static int	tn(t_list **tmp, t_holder *lh)
+{
+	(*tmp)->next = ft_lstnew(lh->lst->content, ft_strlen(lh->lst->content));
+	(*tmp) = (*tmp)->next;
+	return (1);
+}
+
 void		print_way(t_holder *lh, t_node *e, int i, int k)
 {
 	t_holder	*head;
@@ -63,28 +70,20 @@ void		print_way(t_holder *lh, t_node *e, int i, int k)
 	t_list		*start;
 	int			j;
 
-	k = 0;
 	j = 1;
 	head = lh;
-	while (j)
+	while (j && !(j = 0))
 	{
-		j = 0;
-		i = 0;
 		lh = head;
-		k++ ? ft_printf("\n") : 0;
+		k++ ? ft_printf("\n") && (i = 0) : 0;
 		tmp = ft_lstnew("L", 1);
 		start = tmp;
-		while (lh->next)
+		while (lh->next && ++i)
 		{
-			++i;
 			if (lh->lst && check_written(start, lh->lst->content, e->name))
 			{
-				j++;
-				(j == 1) ? 0 : ft_printf(" ");
-				tmp->next = ft_lstnew(lh->lst->content,
-					ft_strlen(lh->lst->content));
-				tmp = tmp->next;
-				ft_printf("L%d%s%s", i, "-", lh->lst->content);
+				(++j == 1) ? 0 : ft_printf(" ");
+				tn(&tmp, lh) && ft_printf("L%d%s%s", i, "-", lh->lst->content);
 				lh->lst = lh->lst->next;
 			}
 			lh = lh->next;

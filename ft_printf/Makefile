@@ -32,6 +32,6 @@ clean:
 fclean: clean
 	@ /bin/rm -f $(NAME)
 	@ /bin/rm -f $(LIB)
-	@ /bin/rm -f libft/$(LIB)
+	@ make fclean -C ../libft
 
 re: fclean all

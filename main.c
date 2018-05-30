@@ -50,6 +50,5 @@ int				main(int ac, char **av)
 	ft_printf("%s\n", buff);
 	ft_strdel(&buff);
 	print_way(head, end(node), 0, 0);
-	// system("leaks -q lem-in");
 	return (1);
 }
