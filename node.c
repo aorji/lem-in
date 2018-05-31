@@ -20,6 +20,8 @@ t_node	*new_node(void)
 	node->start = 0;
 	node->end = 0;
 	node->step = 0;
+	node->x = -1;
+	node->y = -1;
 	node->previous = NULL;
 	node->kid = NULL;
 	node->reserve = NULL;
